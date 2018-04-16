@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_actionStop"
+        android:title="Leállítás/Indítás">
+    </item>
+    <item
+        android:id="@+id/menu_actionSetInterval"
+        android:title="Olvasási intervallum beállítása">
+    </item>
+    <item
+        android:id="@+id/menu_actionRefresh"
+        android:title="Adatok frissítése">
+    </item>
+</menu>
