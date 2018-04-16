@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <integer name="CPUFragment_id">1</integer>
+    <integer name="MEMFragment_id">2</integer>
+    <integer name="ProcessFragment_id">3</integer>
+    <integer name="default_readInterval">500</integer>
+</resources>

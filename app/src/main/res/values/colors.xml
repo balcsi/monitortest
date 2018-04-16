@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3ecdf9</color>
+    <color name="colorPrimaryDark">#2335ff</color>
+    <color name="colorAccent">#2335ff</color>
+    <color name="colorTextPrimary">#120f0f</color>
+    <color name="colorTextSecondary">#585757</color>
+    <color name="transparent_black">#80000000</color>
+    <color name="colorGrey">#c3c3c3</color>
+    <color name="colorWhite">#ffffff</color>
+
+    <color name="memTotal">#09ab00</color>
+    <color name="memFree">#33e689</color>
+    <color name="memBuffers">#2680e1</color>
+    <color name="memCached">#df4646</color>
+    <color name="memSReclaimable">#5cd2d2</color>
+    <color name="memUsed">#ef7731</color>
+    <color name="memAvail">#dc1f1f</color>
+    <color name="memThreshold">#564093</color>
+
+</resources>

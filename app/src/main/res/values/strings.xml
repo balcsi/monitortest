@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">monitortest</string>
+    <string name="shared_pref_file">monitortest.PREF_FILE</string>
+
+
+
+
+
+
+    <!--UsageStatsFragment-->
+    <string name="slide_usage_stats_btn_text">Navigálj a settingsbe</string>
+    <string name="slide_usage_stats_title_text">Az UsageStats API engedélyezése</string>
+    <string name="slide_usage_stats_cant_move_further">A továbblépéshez engedélyezni kell az UsageStats használatát!</string>
+    <string name="slide_usage_stats_desc_text">PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER </string>
+
+    <!--DescriptionFragment-->
+    <string name="slide_description_title_text">MonitorTest</string>
+    <string name="slide_description_desc_text">PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER </string>
+
+    <!--DialogWarning-->
+    <string name="dialog_warning_name_key">monitor_dialog_warning</string>
+    <string name="dialog_warning_title_text">Figyelmeztetés</string>
+    <string name="dialog_warning_desc_text">Engedély nélkül bizonyos funkciók nem működnek megfelelően.</string>
+
+    <!--DialogReadInterval-->
+    <string name="dialog_readInterval_title_text">ReadInterval</string>
+
+    <!--CPUFragment-->
+    <string name="fragment_cpu_title">CPU adatok</string>
+
+    <!--sharedpreferences-->
+    <string name="sharedpreference_name_key">monitortest_shared_pref</string>
+    <string name="permission_is_granted_key">permission_is_granted_key</string>
+    <string name="readInterval">readInterval</string>
+
+    <string name="fragment_process_pid">PID</string>
+    <string name="fragment_process_name">Name</string>
+    <string name="fragment_process_pkg_name">Package Name</string>
+
+
+
+
+</resources>

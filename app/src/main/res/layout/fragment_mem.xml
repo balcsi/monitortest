@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.LinearLayoutCompat
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    >
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/fragment_mem_relLay"
+    >
+
+        <com.github.mikephil.charting.charts.BarChart
+            android:id="@+id/fragment_mem_bar_chart"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true">
+
+        </com.github.mikephil.charting.charts.BarChart>
+
+        <com.github.mikephil.charting.charts.PieChart
+            android:id="@+id/fragment_mem_pie_chart"
+            android:layout_width="match_parent"
+            android:layout_height="235dp"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/fragment_mem_bar_chart"></com.github.mikephil.charting.charts.PieChart>
+
+        <ListView
+            android:id="@+id/fragment_mem_process_list"
+            android:layout_width="match_parent"
+            android:layout_height="91dp"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentStart="true"></ListView>
+
+        <Button
+            android:id="@+id/fragment_mem_refresh"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:layout_alignParentEnd="true"
+            android:layout_alignTop="@+id/fragment_mem_process_list"
+            android:background="@drawable/ic_action_name" />
+
+
+
+    </RelativeLayout>
+
+
+
+</android.support.v7.widget.LinearLayoutCompat>
