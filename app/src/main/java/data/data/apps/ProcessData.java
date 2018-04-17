@@ -6,10 +6,12 @@ public class ProcessData {
 
     private AppData appData;
     private MemData memData;
+    private ProcessNetData processNetData;
 
-    public ProcessData(AppData appData, MemData memData) {
+    public ProcessData(AppData appData, MemData memData, ProcessNetData processNetData) {
         this.appData = appData;
         this.memData = memData;
+        this.processNetData = processNetData;
     }
 
     public AppData getAppData() {
@@ -23,7 +25,8 @@ public class ProcessData {
     public static ProcessData returnBlank(final int pid) {
         AppData appData = new AppData(-1, "???", "???");
         MemData memData = MemData.returnBlank(pid);
-        return new ProcessData(appData, memData);
+        ProcessNetData processNetData = new ProcessNetData(0,0,0,0);
+        return new ProcessData(appData, memData, processNetData);
     }
 
     @Override
@@ -31,8 +34,7 @@ public class ProcessData {
         return "ProcessData{" +
                 "appData=" + appData +
                 ", memData=" + memData +
+                ", processNetData=" + processNetData +
                 '}';
     }
-
-
 }

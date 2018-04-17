@@ -39,10 +39,10 @@
             android:textAllCaps="true"
         />
     </LinearLayout>
-
     <TextView
+        android:layout_marginLeft="20dp"
         android:id="@+id/adapter_mem_process_entry_additional"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:visibility="gone"
     />

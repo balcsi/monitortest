@@ -17,13 +17,10 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 
 import com.example.balogtamas.monitortest.Activities.DataActivity;
-import com.example.balogtamas.monitortest.Fragments.Adapter.ProcessListAdapter;
 import com.example.balogtamas.monitortest.Interfaces.IMemDataSender;
 
 import com.example.balogtamas.monitortest.R;
@@ -33,7 +30,6 @@ import com.github.mikephil.charting.charts.BarChart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
-import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -47,18 +43,14 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import data.data.apps.ProcessData;
 import data.data.mem.GlobalMemData;
 import data.data.mem.MemData;
 
 public class MEMFragment extends Fragment {
 
-
     private static final String TAG = "MEMFragment";
-
 
     private PieChart pieChart;
     private BarChart barChart;
@@ -68,15 +60,6 @@ public class MEMFragment extends Fragment {
     /*private ProcessListAdapter adapter;
     List<ProcessData> processDataList = new ArrayList<>();
     ListView processListView;*/
-
-
-
-
-    //boolean onPause;
-
-
-
-    //service data
 
     IMemDataSender memDataSender = new IMemDataSender() {
         @Override
@@ -107,44 +90,21 @@ public class MEMFragment extends Fragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_mem, container, false);
         //TODO: ez lehet nem kell, illetve ha kell, tuti nem így adunk neki uid-t
         view.setId(getContext().getResources().getInteger(R.integer.MEMFragment_id));
         mTfRegular = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Regular.ttf");
         mTfLight = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Light.ttf");
-
-        /*button = view.findViewById(R.id.fragment_mem_refresh);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                ((DataActivity) getActivity()).displayProcesses();
-            }
-        });*/
         pieChart = view.findViewById(R.id.fragment_mem_pie_chart);
         barChart = view.findViewById(R.id.fragment_mem_bar_chart);
-
         setupPieChart();
         setupBarChart();
-
-        //adapter
-        //processListView = view.findViewById(R.id.fragment_mem_process_list);
-        //setAdapter();
-
-        //onPause = false;
         return view;
     }
-
-   /* private void setAdapter()
-    {
-        adapter = new ProcessListAdapter(getActivity(), R.layout.fragment_mem_process_entry , processDataList);
-        processListView.setAdapter(adapter);
-    }*/
 
     @Override
     public void onPause() {
         super.onPause();
-        //onPause = true;
     }
 
     @Override
@@ -154,14 +114,10 @@ public class MEMFragment extends Fragment {
             ((DataActivity)getActivity()).setMemDataSender(memDataSender);
             Log.d(TAG, "onActivityCreated: setMemDataSender called.");
         }
-        if(((DataActivity)getActivity()).getMemDataSender() == memDataSender) {
-            //setAdapter();
-        }
     }
-
+    //TODO zoom out?
     void setupBarChart()
     {
-        //barChart.setOnClickListener(this);
         barChart.setDrawBarShadow(false);
         barChart.setDrawValueAboveBar(true);
         pieChart.setBackgroundColor(Color.WHITE);
@@ -172,18 +128,15 @@ public class MEMFragment extends Fragment {
         // scaling can now only be done on x- and y-axis separately
         barChart.setPinchZoom(false);
         barChart.setDrawGridBackground(false);
-        // mChart.setDrawYLabels(false);
+        barChart.setDoubleTapToZoomEnabled(false);
 
-        //IAxisValueFormatter xAxisFormatter = new DayAxisValueFormatter(barChart);
-
-        XAxis xAxis = barChart.getXAxis();
-        xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
-        xAxis.setTypeface(mTfLight);
-        xAxis.setDrawGridLines(false);
-        xAxis.setGranularity(1f); // only intervals of 1 day
-        xAxis.setLabelCount(7);
+        //XAxis xAxis = barChart.getXAxis();
+        //xAxis.setPosition(XAxis.XAxisPosition.BOTTOM);
+        //xAxis.setTypeface(mTfLight);
+        //xAxis.setDrawGridLines(false);
+        //xAxis.setGranularity(1f); // only intervals of 1 day
+        //xAxis.setLabelCount(7);
         //xAxis.setValueFormatter(xAxisFormatter);
-
 
         LeftAxisValueFormatter leftAxisValueFormatter = new LeftAxisValueFormatter();
         YAxis leftAxis = barChart.getAxisLeft();
@@ -195,14 +148,6 @@ public class MEMFragment extends Fragment {
         leftAxis.setValueFormatter(leftAxisValueFormatter);// this replaces setStartAtZero(true)
 
         barChart.getAxisRight().setEnabled(false);
-        /*YAxis rightAxis = barChart.getAxisRight();
-        rightAxis.setDrawGridLines(false);
-        rightAxis.setTypeface(mTfLight);
-        rightAxis.setLabelCount(8, false);
-        //rightAxis.setValueFormatter(custom);
-        rightAxis.setSpaceTop(15f);
-        rightAxis.setAxisMinimum(0f); // this replaces setStartAtZero(true)*/
-
 
         Legend l = barChart.getLegend();
         l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
@@ -210,8 +155,6 @@ public class MEMFragment extends Fragment {
         l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
         l.setDrawInside(false);
         l.setEnabled(false);
-
-        //a 2 chart-nak egy legendje lesz, azonos színekkel
         //l.setForm(Legend.LegendForm.SQUARE);
         //l.setFormSize(15f);
         //l.setTextSize(12f);
@@ -222,36 +165,33 @@ public class MEMFragment extends Fragment {
     void setBarData(GlobalMemData memdata)
     {
         ArrayList<BarEntry> values = new ArrayList();
-
         HashMap<String, Long> memvalues = memdata.getData();
         int i = 1;
         for (Map.Entry<String, Long> entry : memvalues.entrySet()) {
-            values.add(new BarEntry(i++, entry.getValue()));
+            if (!(entry.getKey() == "memTotal")) {
+                values.add(new BarEntry(i++, entry.getValue()));
+            }
         }
 
         BarDataSet set1;
         if (barChart.getData() != null &&
                 barChart.getData().getDataSetCount() > 0) {
-            set1 = (BarDataSet) barChart.getData().getDataSetByIndex(0);
-            set1.setValues(values);
-            set1.setColors(getColors());
-            barChart.getData().notifyDataChanged();
-            barChart.notifyDataSetChanged();
+                    set1 = (BarDataSet) barChart.getData().getDataSetByIndex(0);
+                    set1.setValues(values);
+                    set1.setColors(getColors());
+                    barChart.getData().notifyDataChanged();
+                    barChart.notifyDataSetChanged();
         } else {
             set1 = new BarDataSet(values, "" ); //"/proc/meminfo"
-
             set1.setDrawIcons(false);
-
             set1.setColors(getColors());
 
             ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
             dataSets.add(set1);
-
             BarData data = new BarData(dataSets);
             data.setValueTextSize(10f);
             data.setValueTypeface(mTfLight);
             data.setBarWidth(0.9f);
-
             barChart.setData(data);
         }
     }
@@ -280,41 +220,30 @@ public class MEMFragment extends Fragment {
 
     void setupPieChart()
     {
-
         pieChart.setBackgroundColor(Color.WHITE);
-
         moveOffScreen();
 
         pieChart.setUsePercentValues(true);
         pieChart.getDescription().setEnabled(true);
 
         Description d = new Description();
-        d.setText("Global memory data from procfs");
-        pieChart.setDescription(d);
+        d.setText(getActivity().getString(R.string.graph_data_real_time));
 
+        pieChart.setDescription(d);
         pieChart.setCenterTextTypeface(mTfLight);
         pieChart.setCenterText(generateCenterSpannableText());
-
         pieChart.setDrawHoleEnabled(true);
         pieChart.setHoleColor(Color.WHITE);
-
         pieChart.setTransparentCircleColor(Color.WHITE);
         pieChart.setTransparentCircleAlpha(110);
-
         pieChart.setHoleRadius(58f);
         pieChart.setTransparentCircleRadius(61f);
-
         pieChart.setDrawCenterText(true);
-
         pieChart.setRotationEnabled(true);
         pieChart.setHighlightPerTapEnabled(true);
-
         pieChart.setMaxAngle(360f); // HALF CHART
         pieChart.setRotationAngle(360f);
         pieChart.setCenterTextOffset(0, -20);
-
-        //setData(4, 100);
-
         pieChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
 
         Legend l = pieChart.getLegend();
@@ -326,19 +255,11 @@ public class MEMFragment extends Fragment {
         l.setXEntrySpace(3f);
         l.setYEntrySpace(0f);
         l.setYOffset(0f);
-
-        // entry label styling
-        pieChart.setDrawEntryLabels(false);
-        //pieChart.setEntryLabelColor(Color.WHITE);
-        //pieChart.setEntryLabelTypeface(mTfRegular);
-        //pieChart.setEntryLabelTextSize(12f);
     }
 
     private void moveOffScreen() {
-
         Display display = getActivity().getWindowManager().getDefaultDisplay();
         int height = display.getHeight();  // deprecated
-
         int offset = (int)(height * 0.65); /* percent to move */
 
         RelativeLayout.LayoutParams rlParams =
@@ -348,20 +269,18 @@ public class MEMFragment extends Fragment {
     }
 
     private void setPieData(GlobalMemData memdata) {
-
         ArrayList<PieEntry> values = new ArrayList<PieEntry>();
-
         HashMap<String, Long> memvalues = memdata.getData();
         for (Map.Entry<String, Long> entry : memvalues.entrySet()) {
-            values.add(new PieEntry(entry.getValue(), entry.getKey()));
+            if (!(entry.getKey() == "memTotal")) {
+                values.add(new PieEntry(entry.getValue(), entry.getKey()));
+            }
         }
 
-        PieDataSet dataSet = new PieDataSet(values, "procfs: /proc/meminfo");
+        PieDataSet dataSet = new PieDataSet(values, "");//"procfs: /proc/meminfo");
         dataSet.setSliceSpace(3f);
         dataSet.setSelectionShift(5f);
-
         dataSet.setColors(getColors());
-        //dataSet.setSelectionShift(0f);
 
         PieData data = new PieData(dataSet);
         data.setValueFormatter(new PercentFormatter());
@@ -369,7 +288,6 @@ public class MEMFragment extends Fragment {
         data.setValueTextColor(Color.WHITE);
         data.setValueTypeface(mTfLight);
         pieChart.setData(data);
-
         pieChart.invalidate();
     }
 
@@ -386,13 +304,11 @@ public class MEMFragment extends Fragment {
         return s;
     }
 
-
     private void drawGraph(MemData memData) {
         Log.i(TAG, "mem drawGraph: called, usage: " + 0);
     }
-    private void drawPieChart(GlobalMemData memdata)
-    {
+
+    private void drawPieChart(GlobalMemData memdata) {
         setPieData(memdata);
     }
-
 }

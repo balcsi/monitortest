@@ -226,7 +226,8 @@ public class MemData
         return new MemData(pid);
     }
 
-    @Override
+    //TODO: 27-es API-n valahogy máshogy kell, igazából lényegtelen
+    /*@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
         try {
@@ -246,7 +247,31 @@ public class MemData
             System.err.println(e);
         }
         return sb.toString();
+    }*/
+
+    @Override
+    public String toString() {
+        return  "dalvikPrivateClean: " + dalvikPrivateClean + " kB" + '\n' +
+                "dalvikPrivateDirty: " + dalvikPrivateDirty + " kB" + '\n' +
+                "dalvikPss: " + dalvikPss + " kB" + '\n' +
+                "dalvikSharedClean: " + dalvikSharedClean + " kB" + '\n' +
+                "dalvikSharedDirty: " + dalvikSharedDirty + " kB" + '\n' +
+                "dalvikSwappablePss: " + dalvikSwappablePss + " kB" + '\n' +
+                "dalvikSwappedOut: " + dalvikSwappedOut + " kB" + '\n' +
+                "nativePrivateClean: " + nativePrivateClean + " kB" + '\n' +
+                "nativePrivateDirty: " + nativePrivateDirty + " kB" + '\n' +
+                "nativePss: " + nativePss + " kB" + '\n' +
+                "nativeSharedClean: " + nativeSharedClean + " kB" + '\n' +
+                "nativeSharedDirty: " + nativeSharedDirty + " kB" + '\n' +
+                "nativeSwappablePss: " + nativeSwappablePss + " kB" + '\n' +
+                "nativeSwappedOut: " + nativeSwappedOut + " kB" + '\n' +
+                "otherPrivateClean: " + otherPrivateClean + " kB" + '\n' +
+                "otherPrivateDirty: " + otherPrivateDirty + " kB" + '\n' +
+                "otherPss: " + otherPss + " kB" + '\n' +
+                "otherSharedClean: " + otherSharedClean + " kB" + '\n' +
+                "otherSharedDirty: " + otherSharedDirty + " kB" + '\n' +
+                "otherSwappablePss: " + otherSwappablePss + " kB" + '\n' +
+                "otherSwappedOut: " + otherSwappedOut + " kB"
+                ;
     }
-
-
 }

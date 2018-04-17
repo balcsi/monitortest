@@ -8,18 +8,30 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.balogtamas.monitortest.R;
+import com.example.balogtamas.monitortest.util.UsageStatsPermissionHelper;
 
 public class WarningDialog extends DialogFragment {
+
+    UsageStatsPermissionHelper usageStatsPermissionHelper;
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         //return super.onCreateDialog(savedInstanceState);
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
+        usageStatsPermissionHelper = new UsageStatsPermissionHelper(getActivity().getApplicationContext());
         View dialog = layoutInflater.inflate(R.layout.dialog_warning, null, false);
         TextView desc = dialog.findViewById(R.id.dialog_warning_desc);
+        Button button = dialog.findViewById(R.id.dialog_warning_btn);
+        button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                usageStatsPermissionHelper.getUsagePermissions();
+            }
+        });
 
         //TODO::nincs warningdialog.Builder ?
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity())

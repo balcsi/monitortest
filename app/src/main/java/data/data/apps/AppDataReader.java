@@ -16,6 +16,7 @@ import java.util.TreeMap;
 
 import data.data.apps.AppData;
 import data.data.mem.MemData;
+import data.data.network.NetworkDataReader;
 
 
 public class AppDataReader {
@@ -24,12 +25,14 @@ public class AppDataReader {
     private RunningProcesses runningProcesses;
     private ActivityManager activityManager;
     private PackageManager packageManager;
+    private NetworkDataReader networkDataReader;
 
     @SuppressWarnings("WrongConstant")
     public AppDataReader(Context context) {
         runningProcesses = new RunningProcesses();
         activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
         packageManager = context.getApplicationContext().getPackageManager();
+        networkDataReader = new NetworkDataReader(context);
         if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
             usageStatsManager = (UsageStatsManager) context.getSystemService("usagestats");
         } else {
@@ -75,7 +78,6 @@ public class AppDataReader {
     }
 
     //foreground
-    //itt visszaadjuk azokat is, amiről nem tudunk memoryinfo-t kinyerni, ld. "-1, ???, ???"
     public ArrayList<ProcessData> getProcessData()
     {
         long now = System.currentTimeMillis();
@@ -87,8 +89,10 @@ public class AppDataReader {
                 String packageName = usageStats.getPackageName();
                 String processName = getName(packageName);
                 int pid = runningProcesses.getPIDfromName(packageName);
+                //TODO ezt gyakorlatban nem tudom tesztelni, 23-as api kell hozzá minimum, de 23+ api kell hogy az emulátor tudjon wifi/mobilnetet emulálni; 26-on meg csak a saját appom PID-jét látom, ami nem használ internetet :D
+                ProcessNetData processNetData = networkDataReader.getProcessNetData(pid);
                 if(pid > -1) {
-                    data.add(new ProcessData(new AppData(pid, packageName, processName), MemData.createMemData(pid, activityManager)));   
+                    data.add(new ProcessData(new AppData(pid, packageName, processName), MemData.createMemData(pid, activityManager), processNetData));
                 }
             }
         } else {
@@ -96,7 +100,6 @@ public class AppDataReader {
         }
         return data;
     }
-    
 
     String getName(String packageName){
         CharSequence appName;

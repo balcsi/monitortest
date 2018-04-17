@@ -32,7 +32,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 
+import com.example.balogtamas.monitortest.Dialogs.CpuInfoDialog;
 import com.example.balogtamas.monitortest.Dialogs.IntervalReadDialog;
+import com.example.balogtamas.monitortest.Dialogs.MemInfoDialog;
 import com.example.balogtamas.monitortest.Dialogs.WarningDialog;
 import com.example.balogtamas.monitortest.Fragments.Adapter.PagerAdapter;
 import com.example.balogtamas.monitortest.Fragments.CPUFragment;
@@ -90,13 +92,11 @@ public class DataActivity extends AppCompatActivity {
         public void onServiceConnected(ComponentName name, IBinder service) {
             serviceMonitor = ((ServiceMonitor.ServiceMonitorDataBinder) (service)).getService();
             if(serviceMonitor != null) {
-                //setCpuReaderListener();
                 mHandler.post(mRunnable);
                 isBound = true;
                 isRunning = true;
                 Log.i(TAG, "onServiceConnected: binded");
             }
-            
         }
 
         @Override
@@ -111,41 +111,14 @@ public class DataActivity extends AppCompatActivity {
         @Override
         public void run() {
             mHandler.postDelayed(this, readInterval);
-            //if(serviceMonitor!= null) {
-                ////Log.i(TAG, "cpu usage: " + serviceMonitor.getCPU());
                 getCpuUsage();
                 getGlobalMemData();
-                //displayProcesses();
-                ////Log.i(TAG, "mem usage: " + serviceMonitor.getMem(15060).toString());
-                ////Log.i(TAG, "mem usage: " + serviceMonitor.getMem());
-                //serviceMonitor.getMem();
-                ////Log.i(TAG, "global mem usage: " +  serviceMonitor.getGlobalMem().toString());
-                //processList = serviceMonitor.getAppDatas();
-                //Log.d(TAG, "processlist: " + '\n');
-                //for (AppData data : processList) {
-                    //Log.d(TAG, data.toString());
-                //}
-                /*processDataArrayList = serviceMonitor.getProcesses();
-                for (ProcessData data : processDataArrayList) {
-                    Log.d(TAG, data.toString());
-                }*/
+            Log.d(TAG, "run: " + serviceMonitor.getNetworkData());
 
-                if( usageStatsPermissionHelper!= null && usageStatsPermissionHelper.getUsageStats()) {
-
-                }
-                Log.i(TAG, "getUsageStats: " + usageStatsPermissionHelper.getUsageStats());
 
         }
     };
     private Handler mHandler = new Handler();
-
-
-    /*MemFragmentEntryOnClick memFragmentEntryOnClick = new MemFragmentEntryOnClick() {
-        @Override
-        public void onClick() {
-            doUpdate = !doUpdate;
-        }
-    };*/
 
     //debughoz:
     //ArrayList<AppData> processList = new ArrayList<>();
@@ -207,9 +180,7 @@ public class DataActivity extends AppCompatActivity {
             if(cpuDataSender != null) {
                 cpuDataSender.drawCpuGraph(serviceMonitor.getCPU());
             }
-            //return -1;
         }
-        //return 0;
     }
 
     void getGlobalMemData()
@@ -219,9 +190,7 @@ public class DataActivity extends AppCompatActivity {
                 memDataSender.drawMemPieChart(serviceMonitor.getGlobalMem());
                 memDataSender.drawMemBarChart(serviceMonitor.getGlobalMem());
             }
-            //return -1;
         }
-        //return 0;
     }
 
     //TODO ezt publicra tettem, hogy elérjem a fragmentből; gondolom erre is inkább interfész kellene
@@ -234,7 +203,15 @@ public class DataActivity extends AppCompatActivity {
         }
     }
 
-   /* void displayProcesses()
+    void doOneTick()
+    {
+        getCpuUsage();
+        getGlobalMemData();
+        displayProcesses();
+    }
+
+   //TODO majd interfészhez
+    /* void displayProcesses()
     {
         if(serviceMonitor != null) {
             if (iProcessDataSender != null) {
@@ -247,33 +224,14 @@ public class DataActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_data);
+
         context = getApplicationContext();
-        //textView = findViewById(R.id.textview);
         initCoordinatorLayout();
         initToolBar();
-
         sharedPreferences = getSharedPreferences(getString(R.string.sharedpreference_name_key), MODE_PRIVATE);
-        //sharedPreferences.edit().putInt(getString(R.string.readInterval), R.integer.default_readInterval);
         readInterval = sharedPreferences.getInt(getString(R.string.readInterval),getResources().getInteger(R.integer.default_readInterval));
-
-        //toolbar = findViewById(R.id.activity_data_tool_bar);
-        //setSupportActionBar(toolbar);
-
-        //editText = findViewById(R.id.edittext);
-        //btn = findViewById(R.id.btn);
-        //btn.setText("execute");
-        /*btn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                textView.setText(new ShellExecutor().execute(editText.getText().toString()));
-            }
-        });*/
-        //bindService(new Intent(this, ServiceMonitor.class), serviceConnection, BIND_AUTO_CREATE);
-        //readThread.start();
         usageStatsPermissionHelper = new UsageStatsPermissionHelper(getApplicationContext());
         usageStatsPermissionHelper.getUsagePermissions();
-        //getUsagePermissions();
-        //Log.i(TAG, "onCreate: " + serviceMonitor);
     }
 
     @Override
@@ -324,8 +282,6 @@ public class DataActivity extends AppCompatActivity {
             }
         });
 
-        //initToolBar();
-        //initTabLayout();
     }
 
     private void setupAdapter(PagerAdapter adapter)
@@ -334,7 +290,6 @@ public class DataActivity extends AppCompatActivity {
         pagerAdapter.addFragment(new MEMFragment(), "MEM");
         pagerAdapter.addFragment(new ProcessFragment(), "Processes");
     }
-
     private void initToolBar()
     {
         toolbar = findViewById(R.id.activity_data_tool_bar);
@@ -348,9 +303,9 @@ public class DataActivity extends AppCompatActivity {
         getMenuInflater().inflate(R.menu.activity_data_menu, menu);
         return true;
     }
-
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+        //TODO visszatérési érték? adott metódus legyen boolean?
         switch (item.getItemId())
         {
             case R.id.menu_actionStop :
@@ -362,9 +317,8 @@ public class DataActivity extends AppCompatActivity {
                 return isRunning;
 
             case R.id.menu_actionSetInterval :
-                //sharedPreferences.edit().putInt()
                 //TODO elsőnek menübe akartam seekbart rakni, végül egy dialogba raktam, ebből kéne még kiszülni a return value-t, mert itt ahogy nézem a stop és start nem hívódik meg
-                //https://stackoverflow.com/questions/4473940/android-best-practice-returning-values-from-a-dialog?utm_medium=organic&utm_source=google_rich_qa&utm_campaign=google_rich_qa
+                //https://stackoverflow.com/questions/4473940/android-best-practice-returning-values-from-a-dialog
                 new IntervalReadDialog().show(getFragmentManager(), getString(R.string.dialog_readInterval_title_text));
                 stopMonitor();
                 readInterval = sharedPreferences.getInt(getString(R.string.readInterval),getResources().getInteger(R.integer.default_readInterval));
@@ -373,6 +327,15 @@ public class DataActivity extends AppCompatActivity {
                 break;
 
             case R.id.menu_actionRefresh :
+                doOneTick();
+                break;
+
+            case R.id.menu_actionCpuInfo :
+                new CpuInfoDialog().show(getFragmentManager(), "dialog_cpu_info");
+                break;
+
+            case R.id.menu_actionMemInfo :
+                new MemInfoDialog().show(getFragmentManager(), "dialog_mem_info");
                 break;
 
             default:
@@ -381,7 +344,7 @@ public class DataActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    //
+
     void stopMonitor()
     {
         mHandler.removeCallbacks(mRunnable);
@@ -398,19 +361,15 @@ public class DataActivity extends AppCompatActivity {
     protected void onPause() {
         super.onPause();
         stopMonitor();
-        //mHandler.removeCallbacks(mRunnable);
-
     }
 
     @Override
     protected void onStart() {
         super.onStart();
         bindService(new Intent(this, ServiceMonitor.class), serviceConnection, BIND_AUTO_CREATE);
-
-        //startService(new Intent(this, ServiceMonitor.class));
-
     }
 
+    //debug
     private void stopThread()
     {
         try {
@@ -426,10 +385,10 @@ public class DataActivity extends AppCompatActivity {
         //stopService(new Intent(this, ServiceMonitor.class));
         stopMonitor();
         unbindService(serviceConnection);
-        //stopThread();
+
     }
 
-    @Override
+    /*@Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         //TODO:: onRequestPermissionsResult
@@ -444,5 +403,5 @@ public class DataActivity extends AppCompatActivity {
                 return;
             }
         }
-    }
+    }*/
 }

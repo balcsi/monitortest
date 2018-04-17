@@ -1,17 +1,31 @@
 <resources>
     <string name="app_name">monitortest</string>
+
+    <!--sharedpreferences-->
     <string name="shared_pref_file">monitortest.PREF_FILE</string>
+    <string name="sharedpreference_name_key">monitortest_shared_pref</string>
+    <string name="usagestats_permission_is_granted_key">usagestats_permission_is_granted_key</string>
+    <string name="network_permission_is_granted_key">network_permission_is_granted_key</string>
+    <string name="readInterval">readInterval</string>
 
+    <!--menu-->
+    <string name="menu_action_cpuinfo">CPU-ra vonatkozó infók</string>
+    <string name="menu_action_meminfo">Memóriára vonatkozó infók</string>
+    <string name="menu_action_refresh">Frissítés</string>
+    <string name="menu_action_setinterval">Olvasási intervallum beállítása</string>
+    <string name="menu_action_stop_start">Leállítás/Indítás</string>
 
-
-
-
-
-    <!--UsageStatsFragment-->
+    <!--UsageStatsPermissionFragment-->
     <string name="slide_usage_stats_btn_text">Navigálj a settingsbe</string>
     <string name="slide_usage_stats_title_text">Az UsageStats API engedélyezése</string>
     <string name="slide_usage_stats_cant_move_further">A továbblépéshez engedélyezni kell az UsageStats használatát!</string>
     <string name="slide_usage_stats_desc_text">PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER </string>
+
+    <!--NetworkPermissionFragment-->
+    <string name="slide_network_permission_desc_text">android.permission.ACCESS_WIFI_STATE\nandroid.permission.ACCESS_NETWORK_STATE\nandroid.permission.INTERNET"</string>
+    <string name="slide_network_permission_title_text">Internet használattal kapcsolatos API-k engedélyezése</string>
+    <string name="slide_network_permission_cant_move_further">A továbblépéshez engedélyezni kell az említett engedélyeket!</string>
+    <string name="slide_network_permission_btn_text">Engedélyezem a jogosultságokat</string>
 
     <!--DescriptionFragment-->
     <string name="slide_description_title_text">MonitorTest</string>
@@ -23,16 +37,28 @@
     <string name="dialog_warning_desc_text">Engedély nélkül bizonyos funkciók nem működnek megfelelően.</string>
 
     <!--DialogReadInterval-->
-    <string name="dialog_readInterval_title_text">ReadInterval</string>
+    <string name="dialog_readInterval_title_text">Olvasási intervallum</string>
+
+    <!--DialogCpuInfo-->
+    <string name="dialog_cpuinfo_description_text">PLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDER</string>
+    <string name="dialog_cpuinfo_title_text">Hogyan nyerhetőek ki az információk?</string>
+
+    <!--DialogMemInfo-->
+    <string name="dialog_meminfo_description_text">PLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDER</string>
+    <string name="dialog_meminfo_title_text">Hogyan nyerhetőek ki az információk?</string>
+
+
+    <!--IntroActivity-->
+    <string name="intro_activity_permission_granted_already">A szükséges engedélyeket már megadtad!</string>
+
+    <!---->
+    <string name="graph_data_real_time">Minden adat valósidejű</string>
+
 
     <!--CPUFragment-->
     <string name="fragment_cpu_title">CPU adatok</string>
 
-    <!--sharedpreferences-->
-    <string name="sharedpreference_name_key">monitortest_shared_pref</string>
-    <string name="permission_is_granted_key">permission_is_granted_key</string>
-    <string name="readInterval">readInterval</string>
-
+    <!--ProcessFragment-->
     <string name="fragment_process_pid">PID</string>
     <string name="fragment_process_name">Name</string>
     <string name="fragment_process_pkg_name">Package Name</string>

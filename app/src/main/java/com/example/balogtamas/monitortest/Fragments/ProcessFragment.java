@@ -61,7 +61,6 @@ public class ProcessFragment extends Fragment {
         setAdapter();
 
         button = view.findViewById(R.id.fragment_process_refresh);
-
         button.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {

@@ -18,6 +18,8 @@ import data.data.apps.ProcessData;
 import data.data.mem.GlobalMemData;
 import data.data.mem.MemData;
 import data.data.mem.MemDataReader;
+import data.data.network.GlobalNetworkData;
+import data.data.network.NetworkDataReader;
 
 
 public class ServiceMonitor extends Service {
@@ -28,7 +30,7 @@ public class ServiceMonitor extends Service {
     private MemDataReader memDataReader;
     private CpuDataReader cpuDataReader;
     private AppDataReader appDataReader;
-
+    private NetworkDataReader networkDataReader;
 
     public class ServiceMonitorDataBinder extends Binder {
         public ServiceMonitor getService()
@@ -82,12 +84,20 @@ public class ServiceMonitor extends Service {
 
     public ArrayList<ProcessData> getProcesses() { return appDataReader.getProcessData(); }
 
+    public GlobalNetworkData getNetworkData()
+    {
+        networkDataReader.update();
+        return networkDataReader.getNetworkData();
+    }
+
+
 
     @Override
     public void onCreate() {
         cpuDataReader = new CpuDataReader();
         memDataReader = new MemDataReader(getApplicationContext());
         appDataReader = new AppDataReader(getApplicationContext());
+        networkDataReader = new NetworkDataReader(getApplicationContext());
     }
 
 }

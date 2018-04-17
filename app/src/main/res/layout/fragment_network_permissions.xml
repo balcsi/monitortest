@@ -12,28 +12,28 @@
         android:visibility="invisible"/>
 
     <TextView
-        android:id="@+id/usagestats_title"
+        android:id="@+id/network_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Headline"
-        android:text="@string/slide_usage_stats_title_text"
+        android:text="@string/slide_network_permission_title_text"
     />
 
     <TextView
-        android:id="@+id/usagestats_desc"
+        android:id="@+id/network_desc"
         android:layout_width="match_parent"
         android:layout_height="400dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
         android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
-        android:text="@string/slide_usage_stats_desc_text"
+        android:text="@string/slide_network_permission_desc_text"
     />
 
     <Button
-        android:id="@+id/usagestats_btn"
+        android:id="@+id/network_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
-        android:text="@string/slide_usage_stats_btn_text" />
+        android:text="@string/slide_network_permission_btn_text" />
 </LinearLayout>

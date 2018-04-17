@@ -2,14 +2,24 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
         android:id="@+id/menu_actionStop"
-        android:title="Leállítás/Indítás">
+        android:title="@string/menu_action_stop_start">
     </item>
     <item
         android:id="@+id/menu_actionSetInterval"
-        android:title="Olvasási intervallum beállítása">
+        android:title="@string/menu_action_setinterval">
     </item>
     <item
         android:id="@+id/menu_actionRefresh"
-        android:title="Adatok frissítése">
+        android:title="@string/menu_action_refresh">
+    </item>
+
+    <item
+        android:id="@+id/menu_actionMemInfo"
+        android:title="@string/menu_action_meminfo">
+    </item>
+
+    <item
+        android:id="@+id/menu_actionCpuInfo"
+        android:title="@string/menu_action_cpuinfo">
     </item>
 </menu>

@@ -28,7 +28,7 @@ public class UsageStatsPermissionHelper {
         sharedPreferences = (this.context).getSharedPreferences(context.getString(R.string.sharedpreference_name_key), MODE_PRIVATE);
     }
 
-    public  void getUsagePermissions() {
+    public void getUsagePermissions() {
         boolean granted = getUsageStats();
         if (!granted) {
             try {
@@ -85,7 +85,7 @@ public class UsageStatsPermissionHelper {
             granted = false;
         }
         */
-        sharedPreferences.edit().putBoolean(context.getString(R.string.permission_is_granted_key), granted).apply();
+        sharedPreferences.edit().putBoolean(context.getString(R.string.usagestats_permission_is_granted_key), granted).apply();
         return granted;
     }
 }

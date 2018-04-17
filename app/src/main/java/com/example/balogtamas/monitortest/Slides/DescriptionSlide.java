@@ -22,13 +22,13 @@ public class DescriptionSlide extends SlideFragment {
     @Override
     public int backgroundColor() {
         //return super.backgroundColor();
-        return R.color.colorPrimaryDark;
+        return R.color.colorPrimary;
     }
 
     @Override
     public int buttonsColor() {
         //return super.buttonsColor();
-        return R.color.colorPrimary;
+        return R.color.colorPrimaryDark;
     }
 
     @Override

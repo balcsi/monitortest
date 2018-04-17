@@ -15,13 +15,19 @@ import android.widget.Toast;
 
 import com.example.balogtamas.monitortest.R;
 import com.example.balogtamas.monitortest.Slides.DescriptionSlide;
+import com.example.balogtamas.monitortest.Slides.NetworkPermissionsSlide;
 import com.example.balogtamas.monitortest.Slides.UsageStatsSlide;
 import com.example.balogtamas.monitortest.util.UsageStatsPermissionHelper;
 
 import agency.tango.materialintroscreen.MaterialIntroActivity;
 import agency.tango.materialintroscreen.MessageButtonBehaviour;
+import agency.tango.materialintroscreen.SlideFragment;
 import agency.tango.materialintroscreen.SlideFragmentBuilder;
 import agency.tango.materialintroscreen.animations.IViewTranslation;
+
+import static android.Manifest.permission.ACCESS_NETWORK_STATE;
+import static android.Manifest.permission.ACCESS_WIFI_STATE;
+import static android.Manifest.permission.INTERNET;
 
 public class IntroActivity extends MaterialIntroActivity{
 
@@ -42,7 +48,16 @@ public class IntroActivity extends MaterialIntroActivity{
                     }
                 });
         addSlide(new DescriptionSlide());
+        addSlide(new NetworkPermissionsSlide());
         addSlide(new UsageStatsSlide());
+
+         /*addSlide(new SlideFragmentBuilder()
+            .backgroundColor(R.color.colorPrimary)
+            .buttonsColor(R.color.colorPrimaryDark)
+            .neededPermissions(getRequiredPermissions())
+            .title(getString(R.string.slide_network_permission_desc_text))
+            .description(getString(R.string.slide_network_permission_desc_text))
+            .build());*/
 
         /*addSlide(new SlideFragmentBuilder()
                 .backgroundColor(android.support.v7.appcompat.R.color.background_material_light)
@@ -77,7 +92,15 @@ public class IntroActivity extends MaterialIntroActivity{
         } else {
             Toast.makeText(this, "A továbblépéshez engedélyezni kell az UsageStats használatát!", Toast.LENGTH_LONG).show();
         }*/
+    }
 
 
+    String[] getRequiredPermissions()
+    {
+        return new String[] {
+                ACCESS_WIFI_STATE,
+                ACCESS_NETWORK_STATE,
+                INTERNET
+        };
     }
 }

@@ -39,13 +39,13 @@ public class UsageStatsSlide extends SlideFragment {
     @Override
     public int backgroundColor() {
         //return super.backgroundColor();
-        return R.color.colorPrimaryDark;
+        return R.color.colorPrimary;
     }
 
     @Override
     public int buttonsColor() {
         //return super.buttonsColor();
-        return R.color.colorPrimary;
+        return R.color.colorPrimaryDark;
     }
 
     @Override
@@ -55,20 +55,16 @@ public class UsageStatsSlide extends SlideFragment {
         } else {
             return false;
         }
-        //return getUsageStats();
     }
 
     @Override
     public String cantMoveFurtherErrorMessage() {
-        //return super.cantMoveFurtherErrorMessage();
         return getActivity().getApplicationContext().getString(R.string.slide_usage_stats_cant_move_further);
     }
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
-
         usageStatsPermissionHelper = new UsageStatsPermissionHelper(getActivity().getApplicationContext());
         View view = inflater.inflate(R.layout.fragment_usage_stats_permission, container, false);
         title = view.findViewById(R.id.usagestats_title);

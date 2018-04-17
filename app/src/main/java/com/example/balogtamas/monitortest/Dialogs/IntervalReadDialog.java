@@ -35,7 +35,6 @@ public class IntervalReadDialog extends DialogFragment {
 
     @Override
     public Dialog onCreateDialog(Bundle savedInstanceState) {
-        //return super.onCreateDialog(savedInstanceState);
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
         View dialog = layoutInflater.inflate(R.layout.dialog_readinterval, null, false);
         label = dialog.findViewById(R.id.dialog_readinterval_seekbar_label);
@@ -61,11 +60,10 @@ public class IntervalReadDialog extends DialogFragment {
             @Override
             public void onStopTrackingTouch(SeekBar seekBar) {
                 int i = seekBar.getProgress();
-                if(i > 0 &&  i != (progress/_progress)) {
+                if (i < 10) {
                     progress = (i+1)*_progress;
                 } else {
-                    //i=1;
-                    progress = 500;
+                    progress = 5000;
                 }
                 Log.d(TAG, "onStopTrackingTouch: i = " + i);
                 Log.d(TAG, "onStopTrackingTouch: progress = " + progress);

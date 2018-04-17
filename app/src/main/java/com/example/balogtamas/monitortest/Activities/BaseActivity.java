@@ -13,13 +13,15 @@ public class BaseActivity extends AppCompatActivity {
 
     private static final String TAG = "BaseActivity";
     SharedPreferences sharedPreferences;
-    boolean granted;
+    boolean usageStatsGranted;
+    boolean networkGranted;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sharedPreferences = getSharedPreferences(getString(R.string.sharedpreference_name_key), MODE_PRIVATE);
-        granted = sharedPreferences.getBoolean(getString(R.string.permission_is_granted_key), false);
+        usageStatsGranted = sharedPreferences.getBoolean(getString(R.string.usagestats_permission_is_granted_key), false);
+        networkGranted = sharedPreferences.getBoolean(getString(R.string.network_permission_is_granted_key), false);
     }
 
 
@@ -31,8 +33,9 @@ public class BaseActivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        Log.i(TAG, "onStart: " + granted);
-        if(granted) {
+        //Log.i(TAG, "onStart: " + usageStatsGranted);
+        Log.d(TAG, "onStart:\n" + "usageStatsGranted: " + usageStatsGranted +"\nnetworkGranted: " + networkGranted);
+        if(usageStatsGranted && networkGranted) {
             this.startActivity(new Intent(this, DataActivity.class));
             finish();
         } else {
