@@ -1,33 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v7.widget.LinearLayoutCompat
+
+<ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
+    >
+<android.support.v7.widget.LinearLayoutCompat
+
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="vertical"
     >
-
-
     <com.github.mikephil.charting.charts.LineChart
         android:id="@+id/fragment_cpu_chart1"
         android:layout_width="match_parent"
         android:layout_height="450dp">
     </com.github.mikephil.charting.charts.LineChart>
 
- <!--   <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:id="@+id/fragment_cpu_text"
-    />
-
-    <Button
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
-        android:id="@+id/fragment_cpu_btn"
-        >
-
-    </Button>
--->
-
-
+    <View android:layout_width="match_parent" android:layout_height="30dp"/>
 
 </android.support.v7.widget.LinearLayoutCompat>
+</ScrollView>
