@@ -4,6 +4,7 @@ package com.example.balogtamas.monitortest.Fragments;
 
 import android.graphics.Color;
 
+import android.graphics.DashPathEffect;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -27,9 +28,11 @@ import com.example.balogtamas.monitortest.R;
 import com.example.balogtamas.monitortest.util.LeftAxisValueFormatter;
 import com.github.mikephil.charting.animation.Easing;
 import com.github.mikephil.charting.charts.BarChart;
+import com.github.mikephil.charting.charts.Chart;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.components.Description;
 import com.github.mikephil.charting.components.Legend;
+import com.github.mikephil.charting.components.LegendEntry;
 import com.github.mikephil.charting.components.YAxis;
 import com.github.mikephil.charting.data.BarData;
 import com.github.mikephil.charting.data.BarDataSet;
@@ -139,27 +142,47 @@ public class MEMFragment extends Fragment {
         //xAxis.setValueFormatter(xAxisFormatter);
 
         LeftAxisValueFormatter leftAxisValueFormatter = new LeftAxisValueFormatter();
-        YAxis leftAxis = barChart.getAxisLeft();
-        leftAxis.setTypeface(mTfLight);
-        leftAxis.setLabelCount(8, false);
-        leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
-        leftAxis.setSpaceTop(15f);
-        leftAxis.setAxisMinimum(0f);
-        leftAxis.setValueFormatter(leftAxisValueFormatter);// this replaces setStartAtZero(true)
+            YAxis leftAxis = barChart.getAxisLeft();
+            leftAxis.setTypeface(mTfLight);
+            leftAxis.setLabelCount(8, false);
+            leftAxis.setPosition(YAxis.YAxisLabelPosition.OUTSIDE_CHART);
+            leftAxis.setSpaceTop(15f);
+            leftAxis.setAxisMinimum(0f);
+            leftAxis.setValueFormatter(leftAxisValueFormatter);// this replaces setStartAtZero(true)
 
         barChart.getAxisRight().setEnabled(false);
 
         Legend l = barChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setDrawInside(false);
-        l.setEnabled(false);
-        //l.setForm(Legend.LegendForm.SQUARE);
-        //l.setFormSize(15f);
-        //l.setTextSize(12f);
-        //l.setXEntrySpace(1f);
-        //l.setExtra(getColors(), getLabels());
+            l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
+            l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+            l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+            l.setDrawInside(false);
+            l.setEnabled(true);
+            l.setForm(Legend.LegendForm.SQUARE);
+            //l.setFormSize(15f);
+            l.setTextSize(12f);
+            l.setXEntrySpace(3.5f);
+            ArrayList<LegendEntry> legendEntryArrayList = new ArrayList<>();
+            addLegendEntries(legendEntryArrayList);
+            l.setCustom(legendEntryArrayList);
+            //l.setExtra(getColors(), getLabels());
+            l.setWordWrapEnabled(true);
+    }
+
+    void addLegendEntries(ArrayList<LegendEntry> legendEntries)
+    {
+        String[] labels = getLabels();
+        int[] colors = getColors();
+        int size = getColors().length;
+        LegendEntry entry = new LegendEntry();
+        for (int i = 0; i < size; i++) {
+            //formSize final
+            entry = new LegendEntry();
+            entry.label = labels[i];
+            entry.formColor = colors[i];
+            entry.formSize = 15f;
+            legendEntries.add(entry);
+        }
     }
 
     void setBarData(GlobalMemData memdata)
@@ -185,6 +208,7 @@ public class MEMFragment extends Fragment {
             set1 = new BarDataSet(values, "" ); //"/proc/meminfo"
             set1.setDrawIcons(false);
             set1.setColors(getColors());
+            //set1.setStackLabels(getLabels());
 
             ArrayList<IBarDataSet> dataSets = new ArrayList<IBarDataSet>();
             dataSets.add(set1);
@@ -199,32 +223,52 @@ public class MEMFragment extends Fragment {
     int[] getColors()
     {
         return new int[] {
-                getActivity().getColor(R.color.memTotal),
-                getActivity().getColor(R.color.memFree),
+                //getActivity().getColor(R.color.memTotal),
+
                 getActivity().getColor(R.color.memBuffers),
                 getActivity().getColor(R.color.memCached),
                 getActivity().getColor(R.color.memSReclaimable),
-                getActivity().getColor(R.color.memUsed),
                 getActivity().getColor(R.color.memAvail),
-                getActivity().getColor(R.color.memThreshold)
+                getActivity().getColor(R.color.memThreshold),
+                getActivity().getColor(R.color.memFree),
+                getActivity().getColor(R.color.memUsed)
         };
+
+        /*
+        memTotal
+        memFree
+        memBuffers
+        memCached
+        memSReclaimable
+        memUsed
+        memAvail
+        memThreshold
+        */
     }
 
     String[] getLabels () {
         return new String[]{
-                "memTotal", "memFree", "memBuffers",
-                "memCached", "memSReclaimable", "memUsed",
-                "memAvail", "memThreshold"
+                /*"memTotal",*/
+
+                "memBuffers",
+                "memCached",
+                "memSReclaimable",
+                "memAvail",
+                "memThreshold",
+                "memFree",
+                "memUsed"
         };
     }
 
     void setupPieChart()
     {
         pieChart.setBackgroundColor(Color.WHITE);
-        moveOffScreen();
+        //moveOffScreen();
 
         pieChart.setUsePercentValues(true);
-        pieChart.getDescription().setEnabled(true);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.setExtraOffsets(20.f,0.f,20.f,0.f);
+        pieChart.setDragDecelerationFrictionCoef(0.95f);
 
         Description d = new Description();
         d.setText(getActivity().getString(R.string.graph_data_real_time));
@@ -247,25 +291,15 @@ public class MEMFragment extends Fragment {
         pieChart.animateY(1400, Easing.EasingOption.EaseInOutQuad);
 
         Legend l = pieChart.getLegend();
-        l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
-        l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
-        l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
-        l.setWordWrapEnabled(true);
-        l.setDrawInside(false);
-        l.setXEntrySpace(3f);
-        l.setYEntrySpace(0f);
-        l.setYOffset(0f);
-    }
-
-    private void moveOffScreen() {
-        Display display = getActivity().getWindowManager().getDefaultDisplay();
-        int height = display.getHeight();  // deprecated
-        int offset = (int)(height * 0.65); /* percent to move */
-
-        RelativeLayout.LayoutParams rlParams =
-                (RelativeLayout.LayoutParams)pieChart.getLayoutParams();
-        rlParams.setMargins(0, 0, 0, -offset);
-        pieChart.setLayoutParams(rlParams);
+            l.setVerticalAlignment(Legend.LegendVerticalAlignment.TOP);
+            l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.CENTER);
+            l.setOrientation(Legend.LegendOrientation.HORIZONTAL);
+            l.setWordWrapEnabled(true);
+            l.setDrawInside(false);
+            l.setXEntrySpace(3f);
+            l.setYEntrySpace(0f);
+            l.setYOffset(0f);
+            l.setEnabled(false);
     }
 
     private void setPieData(GlobalMemData memdata) {
@@ -278,15 +312,21 @@ public class MEMFragment extends Fragment {
         }
 
         PieDataSet dataSet = new PieDataSet(values, "");//"procfs: /proc/meminfo");
-        dataSet.setSliceSpace(3f);
-        dataSet.setSelectionShift(5f);
-        dataSet.setColors(getColors());
+            dataSet.setSliceSpace(3f);
+            dataSet.setSelectionShift(5f);
+            dataSet.setColors(getColors());
+
+            dataSet.setValueLinePart1OffsetPercentage(80.f);
+            dataSet.setValueLinePart1Length(0.2f);
+            dataSet.setValueLinePart2Length(0.4f);
+            dataSet.setYValuePosition(PieDataSet.ValuePosition.OUTSIDE_SLICE);
 
         PieData data = new PieData(dataSet);
-        data.setValueFormatter(new PercentFormatter());
-        data.setValueTextSize(11f);
-        data.setValueTextColor(Color.WHITE);
-        data.setValueTypeface(mTfLight);
+            data.setValueFormatter(new PercentFormatter());
+            data.setValueTextSize(11f);
+            data.setValueTextColor(Color.BLACK);
+            data.setValueTypeface(mTfLight);
+
         pieChart.setData(data);
         pieChart.invalidate();
     }

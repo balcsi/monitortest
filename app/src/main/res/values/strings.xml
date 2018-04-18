@@ -15,6 +15,7 @@
     <string name="menu_action_refresh">Frissítés</string>
     <string name="menu_action_setinterval">Olvasási intervallum beállítása</string>
     <string name="menu_action_stop_start">Leállítás/Indítás</string>
+    <string name="menu_action_global_network">Globális network adatok követése</string>
 
     <!--UsageStatsPermissionFragment-->
     <string name="slide_usage_stats_btn_text">Navigálj a settingsbe</string>

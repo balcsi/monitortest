@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<menu xmlns:android="http://schemas.android.com/apk/res/android">
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
     <item
         android:id="@+id/menu_actionStop"
         android:title="@string/menu_action_stop_start">
@@ -22,4 +23,18 @@
         android:id="@+id/menu_actionCpuInfo"
         android:title="@string/menu_action_cpuinfo">
     </item>
+
+    <item
+        android:id="@+id/menu_actionGetGlobalNetwork"
+        android:title="@string/menu_action_global_network">
+    </item>
+
+    <!--TODO menübe switch?-->
+    <!--<item
+        android:id="@+id/menu_item_switch"
+        android:title=""
+        app:showAsAction="always"
+        app:actionLayout="@layout/menu_switch">
+        &lt;!&ndash;app:actionLayout&ndash;&gt;
+    </item>-->
 </menu>

@@ -70,6 +70,7 @@ public class DataActivity extends AppCompatActivity {
 
     SharedPreferences sharedPreferences;
     int readInterval;
+    boolean getGlobalNetwork;
 
 
 
@@ -117,7 +118,9 @@ public class DataActivity extends AppCompatActivity {
             mHandler.postDelayed(this, readInterval);
                 getCpuUsage();
                 getGlobalMemData();
-            Log.d(TAG, "run: " + serviceMonitor.getNetworkData());
+                if(getGlobalNetwork) {
+                    Log.d(TAG, "run: " + serviceMonitor.getNetworkData());
+                }
         }
     };
     private Handler mHandler = new Handler();
@@ -232,6 +235,7 @@ public class DataActivity extends AppCompatActivity {
         initToolBar();
         sharedPreferences = getSharedPreferences(getString(R.string.sharedpreference_name_key), MODE_PRIVATE);
         readInterval = sharedPreferences.getInt(getString(R.string.readInterval),getResources().getInteger(R.integer.default_readInterval));
+        getGlobalNetwork = true;
         usageStatsPermissionHelper = new UsageStatsPermissionHelper(getApplicationContext());
         usageStatsPermissionHelper.getUsagePermissions();
     }
@@ -299,6 +303,8 @@ public class DataActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.activity_data_menu, menu);
+        //MenuItem item = menu.findItem(R.id.menu_item_switch);
+        //item.setActionView(R.layout.menu_switch);
         return true;
     }
     @Override
@@ -315,11 +321,9 @@ public class DataActivity extends AppCompatActivity {
                 return isRunning;
 
             case R.id.menu_actionSetInterval :
-                //TODO elsőnek menübe akartam seekbart rakni, végül egy dialogba raktam, ebből kéne még kiszülni a return value-t, mert itt ahogy nézem a stop és start nem hívódik meg
                 //https://stackoverflow.com/questions/4473940/android-best-practice-returning-values-from-a-dialog
                 new IntervalReadDialog().show(getFragmentManager(), getString(R.string.dialog_readInterval_title_text));
                 Log.d(TAG, "onOptionsItemSelected: " + readInterval);
-
                 break;
 
             case R.id.menu_actionRefresh :
@@ -333,6 +337,10 @@ public class DataActivity extends AppCompatActivity {
             case R.id.menu_actionMemInfo :
                 new MemInfoDialog().show(getFragmentManager(), "dialog_mem_info");
                 break;
+
+            case R.id.menu_actionGetGlobalNetwork :
+                getGlobalNetwork = !getGlobalNetwork;
+                Log.d(TAG, "onOptionsItemSelected: getGlobalNetworkChanged to " + getGlobalNetwork );
 
             default:
                 return super.onOptionsItemSelected(item);

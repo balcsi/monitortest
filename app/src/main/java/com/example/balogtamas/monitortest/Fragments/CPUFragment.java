@@ -128,9 +128,12 @@ public class CPUFragment extends Fragment {
         LineData data = new LineData();
 
         cubicChart.setData(data);
+
         Legend l = cubicChart.getLegend();
             l.setForm(Legend.LegendForm.LINE);
             l.setTypeface(mTfLight);
+            l.setHorizontalAlignment(Legend.LegendHorizontalAlignment.LEFT);
+            l.setVerticalAlignment(Legend.LegendVerticalAlignment.BOTTOM);
             l.setTextColor(getActivity().getColor(R.color.colorPrimaryDark));
 
         XAxis xl = cubicChart.getXAxis();
@@ -189,6 +192,7 @@ public class CPUFragment extends Fragment {
                 return -10;
             }
         });
+        set.setDrawFilled(true);
         return set;
     }
 

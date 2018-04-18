@@ -9,13 +9,13 @@
     <color name="colorGrey">#c3c3c3</color>
     <color name="colorWhite">#ffffff</color>
 
-    <color name="memTotal">#09ab00</color>
+    <color name="memTotal">#dc1f1f</color>
     <color name="memFree">#33e689</color>
     <color name="memBuffers">#2680e1</color>
-    <color name="memCached">#df4646</color>
+    <color name="memCached">#564093</color>
     <color name="memSReclaimable">#5cd2d2</color>
     <color name="memUsed">#ef7731</color>
-    <color name="memAvail">#dc1f1f</color>
-    <color name="memThreshold">#564093</color>
+    <color name="memAvail">#09ab00</color>
+    <color name="memThreshold">#df4646</color>
 
 </resources>
