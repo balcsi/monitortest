@@ -59,21 +59,25 @@ public class NetworkDataReader {
     boolean getProcessWifiUsage(int pid)
     {
         boolean success = false;
-        NetworkStats networkStats = null;
-        try {
-            networkStats = networkStatsManager.queryDetailsForUid(
-                    ConnectivityManager.TYPE_WIFI,
-                    "",
-                    0,
-                    System.currentTimeMillis(),
-                    pid);
-            NetworkStats.Bucket bucket = new NetworkStats.Bucket();
-            networkStats.getNextBucket(bucket);
-            this.processNetData.setWifi_rxBytes(bucket.getRxBytes());
-            this.processNetData.setWifi_rxPackets(bucket.getRxPackets());
-            success = true;
-        } catch (RemoteException e) {
-            return success;
+        if(networkPermissionHelper.hasPermission(READ_PHONE_STATE)) {
+            NetworkStats networkStats = null;
+            try {
+                networkStats = networkStatsManager.queryDetailsForUid(
+                        ConnectivityManager.TYPE_WIFI,
+                        "",
+                        0,
+                        System.currentTimeMillis(),
+                        pid);
+                NetworkStats.Bucket bucket = new NetworkStats.Bucket();
+                networkStats.getNextBucket(bucket);
+                this.processNetData.setWifi_rxBytes(bucket.getRxBytes());
+                this.processNetData.setWifi_rxPackets(bucket.getRxPackets());
+                success = true;
+                networkStats.close();
+            } catch (RemoteException e) {
+                networkStats.close();
+                return success;
+            }
         }
         return success;
     }
@@ -81,21 +85,25 @@ public class NetworkDataReader {
     boolean getProcessMobileUsage(int pid)
     {
         boolean success = false;
-        NetworkStats networkStats = null;
-        try {
-            networkStats = networkStatsManager.queryDetailsForUid(
-                    ConnectivityManager.TYPE_MOBILE,
-                    getSubID(ConnectivityManager.TYPE_MOBILE),
-                    0,
-                    System.currentTimeMillis(),
-                    pid);
-            NetworkStats.Bucket bucket = new NetworkStats.Bucket();
-            networkStats.getNextBucket(bucket);
-            this.processNetData.setMobile_rxBytes(bucket.getRxBytes());
-            this.processNetData.setMobile_rxPackets(bucket.getRxPackets());
-            success = true;
-        } catch (RemoteException e) {
-            return success;
+        if(networkPermissionHelper.hasPermission(READ_PHONE_STATE)) {
+            NetworkStats networkStats = null;
+            try {
+                networkStats = networkStatsManager.queryDetailsForUid(
+                        ConnectivityManager.TYPE_MOBILE,
+                        getSubID(ConnectivityManager.TYPE_MOBILE),
+                        0,
+                        System.currentTimeMillis(),
+                        pid);
+                NetworkStats.Bucket bucket = new NetworkStats.Bucket();
+                networkStats.getNextBucket(bucket);
+                this.processNetData.setMobile_rxBytes(bucket.getRxBytes());
+                this.processNetData.setMobile_rxPackets(bucket.getRxPackets());
+                success = true;
+                networkStats.close();
+            } catch (RemoteException e) {
+                networkStats.close();
+                return success;
+            }
         }
         return success;
     }
@@ -113,16 +121,21 @@ public class NetworkDataReader {
 
     void getGlobalWifiUsage()
     {
-        NetworkStats.Bucket bucket = null;
-        long now = System.currentTimeMillis();
-        try {
-            bucket = networkStatsManager.querySummaryForDevice(ConnectivityManager.TYPE_WIFI, "", 0, now);
-            wifi_rxBytes = bucket.getRxBytes();
-            wifi_rxPackets = bucket.getRxPackets();
-        } catch (RemoteException e) {
-            Log.e(TAG, "getGlobalWifiUsage: " + e.getMessage());
-            wifi_rxBytes = 0;
-            wifi_rxPackets = 0;
+        if(networkPermissionHelper.hasPermission(READ_PHONE_STATE)) {
+            NetworkStats.Bucket bucket = null;
+            long now = System.currentTimeMillis();
+            try {
+                bucket = networkStatsManager.querySummaryForDevice(ConnectivityManager.TYPE_WIFI, "", 0, now);
+                wifi_rxBytes = bucket.getRxBytes();
+                wifi_rxPackets = bucket.getRxPackets();
+
+            } catch (RemoteException e) {
+                Log.e(TAG, "getGlobalWifiUsage: " + e.getMessage());
+                wifi_rxBytes = 0;
+                wifi_rxPackets = 0;
+            } catch (SecurityException e) {
+                Log.e(TAG, "getGlobalWifiUsage:" +e.getMessage());
+            }
         }
     }
 

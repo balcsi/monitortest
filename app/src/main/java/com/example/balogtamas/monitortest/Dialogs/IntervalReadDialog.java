@@ -77,6 +77,7 @@ public class IntervalReadDialog extends DialogFragment {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
                         sharedPreferences.edit().putInt(getString(R.string.readInterval), progress).apply();
+                        sharedPreferences.edit().putBoolean(getString(R.string.readIntervalChanged), true).apply();
                         Log.d(TAG, "onClick: " + sharedPreferences.getInt(getString(R.string.readInterval), getResources().getInteger(R.integer.default_readInterval)));
                         //Log.d(TAG, "onClick: " + getString(R.string.readInterval));
                         dialogInterface.dismiss();

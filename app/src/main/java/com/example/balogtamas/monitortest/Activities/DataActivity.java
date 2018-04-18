@@ -110,12 +110,13 @@ public class DataActivity extends AppCompatActivity {
     private Runnable mRunnable = new Runnable() {
         @Override
         public void run() {
+            if(sharedPreferences.getBoolean(getString(R.string.readIntervalChanged), false)) {
+                readInterval = sharedPreferences.getInt(getString(R.string.readInterval), R.integer.default_readInterval);
+            }
             mHandler.postDelayed(this, readInterval);
                 getCpuUsage();
                 getGlobalMemData();
             Log.d(TAG, "run: " + serviceMonitor.getNetworkData());
-
-
         }
     };
     private Handler mHandler = new Handler();
@@ -320,10 +321,10 @@ public class DataActivity extends AppCompatActivity {
                 //TODO elsőnek menübe akartam seekbart rakni, végül egy dialogba raktam, ebből kéne még kiszülni a return value-t, mert itt ahogy nézem a stop és start nem hívódik meg
                 //https://stackoverflow.com/questions/4473940/android-best-practice-returning-values-from-a-dialog
                 new IntervalReadDialog().show(getFragmentManager(), getString(R.string.dialog_readInterval_title_text));
-                stopMonitor();
-                readInterval = sharedPreferences.getInt(getString(R.string.readInterval),getResources().getInteger(R.integer.default_readInterval));
+                //stopMonitor();
+                //readInterval = sharedPreferences.getInt(getString(R.string.readInterval),getResources().getInteger(R.integer.default_readInterval));
                 Log.d(TAG, "onOptionsItemSelected: " + readInterval);
-                startMonitor();
+                //startMonitor();
                 break;
 
             case R.id.menu_actionRefresh :

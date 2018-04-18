@@ -251,27 +251,28 @@ public class MemData
 
     @Override
     public String toString() {
-        return  "dalvikPrivateClean: " + dalvikPrivateClean + " kB" + '\n' +
-                "dalvikPrivateDirty: " + dalvikPrivateDirty + " kB" + '\n' +
-                "dalvikPss: " + dalvikPss + " kB" + '\n' +
-                "dalvikSharedClean: " + dalvikSharedClean + " kB" + '\n' +
-                "dalvikSharedDirty: " + dalvikSharedDirty + " kB" + '\n' +
-                "dalvikSwappablePss: " + dalvikSwappablePss + " kB" + '\n' +
-                "dalvikSwappedOut: " + dalvikSwappedOut + " kB" + '\n' +
-                "nativePrivateClean: " + nativePrivateClean + " kB" + '\n' +
-                "nativePrivateDirty: " + nativePrivateDirty + " kB" + '\n' +
-                "nativePss: " + nativePss + " kB" + '\n' +
-                "nativeSharedClean: " + nativeSharedClean + " kB" + '\n' +
-                "nativeSharedDirty: " + nativeSharedDirty + " kB" + '\n' +
-                "nativeSwappablePss: " + nativeSwappablePss + " kB" + '\n' +
-                "nativeSwappedOut: " + nativeSwappedOut + " kB" + '\n' +
-                "otherPrivateClean: " + otherPrivateClean + " kB" + '\n' +
-                "otherPrivateDirty: " + otherPrivateDirty + " kB" + '\n' +
-                "otherPss: " + otherPss + " kB" + '\n' +
-                "otherSharedClean: " + otherSharedClean + " kB" + '\n' +
-                "otherSharedDirty: " + otherSharedDirty + " kB" + '\n' +
-                "otherSwappablePss: " + otherSwappablePss + " kB" + '\n' +
-                "otherSwappedOut: " + otherSwappedOut + " kB"
+        return  "memory usage: " + '\n' +
+                '\t' + "dalvikPrivateClean: " + dalvikPrivateClean + " kB" + '\n' +
+                '\t' + "dalvikPrivateDirty: " + dalvikPrivateDirty + " kB" + '\n' +
+                '\t' + "dalvikPss: " + dalvikPss + " kB" + '\n' +
+                '\t' + "dalvikSharedClean: " + dalvikSharedClean + " kB" + '\n' +
+                '\t' + "dalvikSharedDirty: " + dalvikSharedDirty + " kB" + '\n' +
+                '\t' + "dalvikSwappablePss: " + dalvikSwappablePss + " kB" + '\n' +
+                '\t' + "dalvikSwappedOut: " + dalvikSwappedOut + " kB" + '\n' +
+                '\t' + "nativePrivateClean: " + nativePrivateClean + " kB" + '\n' +
+                '\t' + "nativePrivateDirty: " + nativePrivateDirty + " kB" + '\n' +
+                '\t' + "nativePss: " + nativePss + " kB" + '\n' +
+                '\t' + "nativeSharedClean: " + nativeSharedClean + " kB" + '\n' +
+                '\t' + "nativeSharedDirty: " + nativeSharedDirty + " kB" + '\n' +
+                '\t' + "nativeSwappablePss: " + nativeSwappablePss + " kB" + '\n' +
+                '\t' + "nativeSwappedOut: " + nativeSwappedOut + " kB" + '\n' +
+                '\t' + "otherPrivateClean: " + otherPrivateClean + " kB" + '\n' +
+                '\t' + "otherPrivateDirty: " + otherPrivateDirty + " kB" + '\n' +
+                '\t' + "otherPss: " + otherPss + " kB" + '\n' +
+                '\t' + "otherSharedClean: " + otherSharedClean + " kB" + '\n' +
+                '\t' + "otherSharedDirty: " + otherSharedDirty + " kB" + '\n' +
+                '\t' + "otherSwappablePss: " + otherSwappablePss + " kB" + '\n' +
+                '\t' + "otherSwappedOut: " + otherSwappedOut + " kB"
                 ;
     }
 }

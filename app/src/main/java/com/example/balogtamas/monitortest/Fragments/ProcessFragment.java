@@ -78,7 +78,6 @@ public class ProcessFragment extends Fragment {
                 return false;
             }
         });
-
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -86,7 +85,6 @@ public class ProcessFragment extends Fragment {
                 ((DataActivity)getActivity()).displayProcesses();
             }
         });
-
         return view;
 
     }
@@ -102,7 +100,6 @@ public class ProcessFragment extends Fragment {
             setAdapter();
         }
         //TODO a lista amiben vannak a processek, áttettem egyelőre fix méretűre (<-> wrap_content)
-        //TODO fix méreten jobban néz ki, de így sem az igazi
     }
 
     private void setAdapter()
@@ -110,7 +107,4 @@ public class ProcessFragment extends Fragment {
         adapter = new ProcessListAdapter(getActivity(), R.layout.fragment_mem_process_entry , processDataList);
         processListView.setAdapter(adapter);
     }
-
-
-
 }

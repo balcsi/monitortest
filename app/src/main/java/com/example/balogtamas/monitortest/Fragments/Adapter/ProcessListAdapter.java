@@ -53,7 +53,7 @@ public class ProcessListAdapter extends ArrayAdapter<ProcessData> {
         TextView name;
         TextView pkgName;
         TextView additionalInfo;
-        ProcessData processData;
+        //ProcessData processData;
     }
 
     @NonNull
@@ -63,6 +63,7 @@ public class ProcessListAdapter extends ArrayAdapter<ProcessData> {
         ProcessData process = getItem(position);
         try {
             ViewHolder holder;
+            StringBuilder sb = new StringBuilder();
             if (convertView == null) {
                 LayoutInflater inflater = LayoutInflater.from(context);
                 convertView = inflater.inflate(mResource, parent, false);
@@ -84,7 +85,9 @@ public class ProcessListAdapter extends ArrayAdapter<ProcessData> {
                 holder.pid.setText(Integer.toString(process.getAppData().getmPID()));
                 holder.name.setText(process.getAppData().getmName());
                 holder.pkgName.setText(process.getAppData().getmPackage());
-                holder.additionalInfo.setText(process.getMemData().toString());
+                sb.append(process.getMemData()).append(process.getProcessNetData().toStringNotEmpty());
+                holder.additionalInfo.setText(sb.toString());
+                // /holder.additionalInfo.setText(process.getMemData().toString());
             }
             return convertView;
         } catch (IllegalArgumentException e) {

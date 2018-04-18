@@ -22,6 +22,10 @@ public class ProcessData {
         return memData;
     }
 
+    public ProcessNetData getProcessNetData() {
+        return processNetData;
+    }
+
     public static ProcessData returnBlank(final int pid) {
         AppData appData = new AppData(-1, "???", "???");
         MemData memData = MemData.returnBlank(pid);
