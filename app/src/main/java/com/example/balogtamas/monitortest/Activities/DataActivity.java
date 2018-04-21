@@ -295,6 +295,8 @@ public class DataActivity extends AppCompatActivity {
     private void initToolBar()
     {
         toolbar = findViewById(R.id.activity_data_tool_bar);
+        //toolbar.setTitleTextColor(getColor(R.color.colorAccent));
+        //toolbar.setSubtitleTextColor(getColor(R.color.colorAccent));
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");

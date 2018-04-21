@@ -23,12 +23,11 @@
     <TextView
         android:id="@+id/network_desc"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="339dp"
         android:layout_marginBottom="8dp"
         android:gravity="center"
-        android:textAppearance="@style/TextAppearance.AppCompat.Subhead"
         android:text="@string/slide_network_permission_desc_text"
-    />
+        android:textAppearance="@style/TextAppearance.AppCompat.Subhead" />
 
     <Button
         android:id="@+id/network_btn"

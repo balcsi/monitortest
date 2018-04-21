@@ -307,12 +307,12 @@ public class MEMFragment extends Fragment {
         HashMap<String, Long> memvalues = memdata.getData();
         for (Map.Entry<String, Long> entry : memvalues.entrySet()) {
             if (!(entry.getKey() == "memTotal")) {
-                values.add(new PieEntry(entry.getValue(), entry.getKey()));
+                values.add(new PieEntry(entry.getValue(), ""));//entry.getKey()));
             }
         }
 
         PieDataSet dataSet = new PieDataSet(values, "");//"procfs: /proc/meminfo");
-            dataSet.setSliceSpace(3f);
+            dataSet.setSliceSpace(0.3f);
             dataSet.setSelectionShift(5f);
             dataSet.setColors(getColors());
 

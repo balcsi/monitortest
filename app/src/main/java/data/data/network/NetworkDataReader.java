@@ -152,6 +152,12 @@ public class NetworkDataReader {
             } catch (RemoteException e) {
                 mobile_rxPackets = 0;
                 mobile_rxBytes = 0;
+                Log.e(TAG, "getGlobalMobileUsage: " + e.getMessage() );
+            }
+            catch (SecurityException e){
+                mobile_rxPackets = 0;
+                mobile_rxBytes = 0;
+                Log.e(TAG, "getGlobalMobileUsage: " + e.getMessage() );
             }
         } else {
             mobile_rxPackets = 0;
