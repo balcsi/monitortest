@@ -23,7 +23,29 @@
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
         app:layout_scrollFlags="enterAlways"
-    />
+    >
+        <LinearLayout
+            android:id="@+id/toolbar_lin_lay"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:weightSum="100"
+            android:orientation="horizontal">
+            <TextView
+                android:id="@+id/toolbar_cpu"
+                android:layout_width="0dp"
+                android:layout_weight="50"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|right"
+            />
+            <TextView
+                android:id="@+id/toolbar_mem"
+                android:layout_width="0dp"
+                android:layout_weight="50"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal|right"
+            />
+        </LinearLayout>
+    </android.support.v7.widget.Toolbar>
         <!--android:layout_height="?attr/actionBarSize"-->
 
         <!--scrollflagsbe--><!--|scroll-->

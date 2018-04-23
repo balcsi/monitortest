@@ -37,7 +37,6 @@ public class DescriptionSlide extends SlideFragment {
         //return getUsageStats();
     }
 
-    //TODO fordítás
     @Override
     public String cantMoveFurtherErrorMessage() {
         return super.cantMoveFurtherErrorMessage();

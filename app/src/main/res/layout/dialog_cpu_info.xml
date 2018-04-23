@@ -3,11 +3,13 @@
     xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <!--TODO nincs sorkizárt? - https://stackoverflow.com/questions/1292575/android-textview-justify-text-->
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/dialog_cpu_info_description"
         android:text="@string/dialog_cpuinfo_description_text"
+        android:gravity="center"
     />
 
 </android.support.constraint.ConstraintLayout>

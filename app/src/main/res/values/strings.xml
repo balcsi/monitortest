@@ -21,7 +21,10 @@
     <string name="slide_usage_stats_btn_text">Navigálj a settingsbe</string>
     <string name="slide_usage_stats_title_text">Az UsageStats API engedélyezése</string>
     <string name="slide_usage_stats_cant_move_further">A továbblépéshez engedélyezni kell az UsageStats használatát!</string>
-    <string name="slide_usage_stats_desc_text">PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER </string>
+    <string name="slide_usage_stats_desc_text">Android Lolipop óta az eddig használt GET_TASKS engedély érvénytelenné vált.
+        \nAhhoz, hogy az előtérben futó folyamatokról információt kaphassunk, kell ez az engedély a telefon használatáról.
+        \nEz egy rendszer szintű jogosultság, további információ az alábbi linken érhető el:
+        \nhttps://developer.android.com/reference/android/Manifest.permission.html </string>
 
     <!--NetworkPermissionFragment-->
     <string name="slide_network_permission_desc_text">android.permission.ACCESS_WIFI_STATE\nandroid.permission.ACCESS_NETWORK_STATE\nandroid.permission.INTERNET"</string>
@@ -31,7 +34,10 @@
 
     <!--DescriptionFragment-->
     <string name="slide_description_title_text">MonitorTest</string>
-    <string name="slide_description_desc_text">PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER PLACEHOLDER </string>
+    <string name="slide_description_desc_text">Az alkalmazás a telefonon futó alkalmazásokról jelenít meg információt.
+        \nEz három csoportba osztható: cpu, memória, illetve hálózat.
+        \nAz app által megjelenített adatokról további információ az adott fragmenten elérhető.
+    </string>
 
     <!--DialogWarning-->
     <string name="dialog_warning_name_key">monitor_dialog_warning</string>
@@ -42,20 +48,31 @@
     <string name="dialog_readInterval_title_text">Olvasási intervallum</string>
 
     <!--DialogCpuInfo-->
-    <string name="dialog_cpuinfo_description_text">PLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDER</string>
+    <string name="dialog_cpuinfo_description_text">A grafikon Y tengelye a processzor kihasználtságát jellemzi.
+        \nEzek az adatok globálisak, tehát az egész telefonra vonatkoznak, nem egy adott folyamatra.
+        <!--
+        \nAz X tengely a beállított olvasási intervallumnak megfelelő időegység.
+        \nAndroid Marshmallow felett az OS biztonsági frissítésekkel lett ellátva.
+        \nEz annyit jelent, hogy az eddig kinyert információk nem olvashatóak ki a procfs mappákból.
+        -->
+    </string>
     <string name="dialog_cpuinfo_title_text">Hogyan nyerhetőek ki az információk?</string>
 
     <!--DialogMemInfo-->
-    <string name="dialog_meminfo_description_text">PLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDERPLACEHOLDER</string>
+    <string name="dialog_meminfo_description_text">
+        Android Lollipop óta API-n keresztül közvetlen nem lehet elérni információkat a telefonon futó folyamatokról.
+        \nAz itt megjelenő információk egy rendszer szintű jogosultság és debug szkriptek együttes alkalmazásával lettek kinyerve.
+        \nA CPU adatokhoz hasonlóan, ezek is globális értékek. Az elérhető folyamatok memóriaigényéről a <b>processes</b> fül nyújt információt.
+        \nAz adatokról részletes információ itt található:\n
+    </string>
+    <string name="dialog_meminfo_description_link">https://www.centos.org/docs/5/html/5.2/Deployment_Guide/s2-proc-meminfo.html</string>
     <string name="dialog_meminfo_title_text">Hogyan nyerhetőek ki az információk?</string>
-
 
     <!--IntroActivity-->
     <string name="intro_activity_permission_granted_already">A szükséges engedélyeket már megadtad!</string>
 
     <!---->
     <string name="graph_data_real_time">Minden adat valósidejű</string>
-
 
     <!--CPUFragment-->
     <string name="fragment_cpu_title">CPU adatok</string>
@@ -65,7 +82,17 @@
     <string name="fragment_process_name">Name</string>
     <string name="fragment_process_pkg_name">Package Name</string>
 
+    <!--MEMFragment-->
+    <string name="memTotal">Összes fizikai memória KB-ban</string>
+    <string name="memFree">A rendszer által nemhasznált fizikai memória KB-ban</string>
+    <string name="memBuffers">A fájlpufferek által használt fizikai memória KB-ban</string>
+    <string name="memCached">A cache által használt fizikiai memória KB-ban</string>
+    <string name="memSReclaimable">A felszabadítható Kernel-beli memóriaegység (slab) értéke KB-ban</string>
+    <string name="memUsed">A rendszer által felhasznált memória KB-ban</string>
+    <string name="memAvail">A rendszer által felhasználható memória KB-ban</string>
+    <string name="memThreshold">Az a küszöbérték, ahol a rendszer kevésnek itéli a memóriát</string>
 
-
+    <string name="mem_fragment_description">Jelentés</string>
+    <string name="mem_fragment_name">Elnevezés</string>
 
 </resources>

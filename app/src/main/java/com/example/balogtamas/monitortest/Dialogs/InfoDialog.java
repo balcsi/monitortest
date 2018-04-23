@@ -5,6 +5,8 @@ import android.app.Dialog;
 import android.app.DialogFragment;
 import android.content.DialogInterface;
 import android.os.Bundle;
+import android.text.method.LinkMovementMethod;
+import android.text.util.Linkify;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.Window;
@@ -18,16 +20,21 @@ public abstract class InfoDialog extends DialogFragment {
 
     private static final String TAG = "InfoDialog";
     protected TextView description;
+    //protected TextView link;
     protected int layoutResource;
     protected int descriptionID;
 
-    protected AlertDialog init(int layoutResource, int descriptionID, String titleText)
+    protected AlertDialog init(int layoutResource, int descriptionID, String titleText)//, int linkID)
     {
         this.layoutResource = layoutResource;
         this.descriptionID = descriptionID;
         LayoutInflater layoutInflater = getActivity().getLayoutInflater();
         View dialog = layoutInflater.inflate(layoutResource, null, false);
         description = dialog.findViewById(descriptionID);
+        /*if(linkID!=0) {
+            link = dialog.findViewById(linkID);
+            link.setMovementMethod(LinkMovementMethod.getInstance());
+        }*/
         return returnAlertDialog(dialog, titleText);
     }
 

@@ -34,8 +34,6 @@ public class GlobalMemData {
         this.memThreshold = 0;
     }
 
-
-
     public void doCompute() {
         memUsed = memTotal - memFree -(memCached+memBuffers+memSReclaimable)-memBuffers;
         activityManager.getMemoryInfo(memoryInfo);
@@ -64,6 +62,7 @@ public class GlobalMemData {
 
     }
 
+    public long getMemAvail() {return memAvail;}
 
     public long getMemTotal() {
         return memTotal;

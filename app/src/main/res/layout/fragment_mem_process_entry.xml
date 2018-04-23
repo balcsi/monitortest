@@ -14,7 +14,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:weightSum="100">
+        android:weightSum="100"
+        android:padding="5dp">
         <!--android:id="@+id/adapter_mem_process_entry"-->
         <TextView
             android:id="@+id/adapter_mem_process_entry_pid"

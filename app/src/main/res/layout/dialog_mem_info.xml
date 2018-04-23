@@ -1,13 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout
-    xmlns:android="http://schemas.android.com/apk/res/android" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:layout_editor_absoluteY="25dp">
 
+    <!--TODO nincs sorkizárt? - https://stackoverflow.com/questions/1292575/android-textview-justify-text-->
     <TextView
+        android:layout_gravity="center_vertical|right"
+        android:id="@+id/dialog_mem_info_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/dialog_mem_info_description"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
         android:text="@string/dialog_meminfo_description_text"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
     />
+    <!--android:textAlignment="center"-->
 
+    <!--TODO kattintható link? setmovementMethod és autoLinkkel se megy, ha a resource-ba <a <href..>link</a>-t írok a resourceba-->
+    <TextView
+        android:gravity="center_horizontal"
+        android:id="@+id/dialog_mem_info_link"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginStart="8dp"
+
+        android:autoLink="web"
+        android:text="@string/dialog_meminfo_description_link"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_mem_info_description"
+    />
+    <!--android:gravity="center"-->
+    <!--android:layout_marginTop="8dp"-->
+    <!--android:textAlignment="textEnd"-->
 </android.support.constraint.ConstraintLayout>

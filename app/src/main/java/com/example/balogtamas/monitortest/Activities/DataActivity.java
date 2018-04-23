@@ -30,6 +30,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 
 import com.example.balogtamas.monitortest.Dialogs.CpuInfoDialog;
@@ -52,6 +53,7 @@ import com.example.balogtamas.monitortest.util.UsageStatsPermissionHelper;
 import java.util.ArrayList;
 import data.data.apps.AppData;
 import data.data.apps.ProcessData;
+import data.data.mem.GlobalMemData;
 
 
 public class DataActivity extends AppCompatActivity {
@@ -116,11 +118,14 @@ public class DataActivity extends AppCompatActivity {
                 sharedPreferences.edit().putBoolean(getString(R.string.readIntervalChanged), false).apply();
             }
             mHandler.postDelayed(this, readInterval);
-                getCpuUsage();
-                getGlobalMemData();
-                if(getGlobalNetwork) {
-                    Log.d(TAG, "run: " + serviceMonitor.getNetworkData());
-                }
+
+            //void->int/float --> így spórolunk függvényhívást
+            //TODO warningok konkatenációra
+            ((TextView) (toolbar.findViewById(R.id.toolbar_lin_lay)).findViewById(R.id.toolbar_cpu)).setText("CPU: " + getCpuUsage() + "%");
+            ((TextView) (toolbar.findViewById(R.id.toolbar_lin_lay)).findViewById(R.id.toolbar_mem)).setText("FREE MEM: " + (int) getGlobalMemData() + "MB");
+            if(getGlobalNetwork) {
+                Log.d(TAG, "run: " + serviceMonitor.getNetworkData());
+            }
         }
     };
     private Handler mHandler = new Handler();
@@ -179,23 +184,34 @@ public class DataActivity extends AppCompatActivity {
         this.iProcessDataSender = iProcessDataSender;
     }
 
-    void getCpuUsage()
+    int getCpuUsage()
     {
+        int retVal = 0;
         if(serviceMonitor!= null) {
             if(cpuDataSender != null) {
-                cpuDataSender.drawCpuGraph(serviceMonitor.getCPU());
+                retVal = serviceMonitor.getCPU();
+                cpuDataSender.drawCpuGraph(retVal);
             }
         }
+        return retVal;
     }
 
-    void getGlobalMemData()
+    float getGlobalMemData()
     {
+        GlobalMemData globalMemData;
+        float retVal= 0f;
         if(serviceMonitor!= null) {
             if(memDataSender != null) {
-                memDataSender.drawMemPieChart(serviceMonitor.getGlobalMem());
-                memDataSender.drawMemBarChart(serviceMonitor.getGlobalMem());
+                globalMemData = serviceMonitor.getGlobalMem();
+                memDataSender.drawMemPieChart(globalMemData);
+                memDataSender.drawMemBarChart(globalMemData);
+                retVal = serviceMonitor.getFreeMem();
+                if(retVal != 0) {
+                    retVal = retVal/1000;
+                }
             }
         }
+        return retVal;
     }
 
     //TODO ezt publicra tettem, hogy elérjem a fragmentből; gondolom erre is inkább interfész kellene
@@ -300,6 +316,7 @@ public class DataActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
+
     }
 
     @Override
@@ -311,7 +328,6 @@ public class DataActivity extends AppCompatActivity {
     }
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        //TODO visszatérési érték? adott metódus legyen boolean?
         switch (item.getItemId())
         {
             case R.id.menu_actionStop :
@@ -320,7 +336,9 @@ public class DataActivity extends AppCompatActivity {
                 } else {
                     startMonitor();
                 }
-                return isRunning;
+                //TODO szerintem elég a break, majd az ős lekezeli
+                //return isRunning;
+                break;
 
             case R.id.menu_actionSetInterval :
                 //https://stackoverflow.com/questions/4473940/android-best-practice-returning-values-from-a-dialog

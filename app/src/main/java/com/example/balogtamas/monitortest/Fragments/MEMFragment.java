@@ -18,10 +18,13 @@ import android.view.Display;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 import android.widget.RelativeLayout;
 
 
 import com.example.balogtamas.monitortest.Activities.DataActivity;
+import com.example.balogtamas.monitortest.Fragments.Adapter.MemEntry;
+import com.example.balogtamas.monitortest.Fragments.Adapter.MemoryDescriptionAdapter;
 import com.example.balogtamas.monitortest.Interfaces.IMemDataSender;
 
 import com.example.balogtamas.monitortest.R;
@@ -46,6 +49,7 @@ import com.github.mikephil.charting.interfaces.datasets.IBarDataSet;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.Map;
 
 import data.data.mem.GlobalMemData;
@@ -54,6 +58,10 @@ import data.data.mem.MemData;
 public class MEMFragment extends Fragment {
 
     private static final String TAG = "MEMFragment";
+
+    MemoryDescriptionAdapter memoryDescriptionAdapter;
+    ArrayList<MemEntry> memEntryArrayList = new ArrayList<>();
+    ListView memEntryListView;
 
     private PieChart pieChart;
     private BarChart barChart;
@@ -96,12 +104,23 @@ public class MEMFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_mem, container, false);
         //TODO: ez lehet nem kell, illetve ha kell, tuti nem így adunk neki uid-t
         view.setId(getContext().getResources().getInteger(R.integer.MEMFragment_id));
+
         mTfRegular = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Regular.ttf");
         mTfLight = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Light.ttf");
         pieChart = view.findViewById(R.id.fragment_mem_pie_chart);
         barChart = view.findViewById(R.id.fragment_mem_bar_chart);
         setupPieChart();
         setupBarChart();
+
+        //TODO csak az első item látszik
+        //@see: https://stackoverflow.com/questions/15875552/arrayadapter-only-returning-one-position-android/15875581#comment30483550_15875581
+        memEntryListView = view.findViewById(R.id.fragment_mem_mementry_list);
+        memEntryArrayList =  getMemEntries();
+        memoryDescriptionAdapter = new MemoryDescriptionAdapter(getContext(), R.layout.fragment_mem_description_entry, memEntryArrayList);
+        memEntryListView.setAdapter(memoryDescriptionAdapter);
+
+
+
         return view;
     }
 
@@ -118,7 +137,7 @@ public class MEMFragment extends Fragment {
             Log.d(TAG, "onActivityCreated: setMemDataSender called.");
         }
     }
-    //TODO zoom out?
+
     void setupBarChart()
     {
         barChart.setDrawBarShadow(false);
@@ -220,6 +239,22 @@ public class MEMFragment extends Fragment {
         }
     }
 
+    private ArrayList<MemEntry> getMemEntries()
+    {
+        ArrayList<MemEntry> memEntries = new ArrayList<>();
+        int[] colors = getColors();
+        int[] descriptions = getDescriptionID();
+        String[] names = getLabels();
+        for (int i = 0; i < colors.length ; i++) {
+            memEntries.add(new MemEntry(colors[i], descriptions[i], names[i]));
+        }
+        return memEntries;
+    }
+
+   /* void setAdapter()
+    {
+    }*/
+
     int[] getColors()
     {
         return new int[] {
@@ -249,7 +284,6 @@ public class MEMFragment extends Fragment {
     String[] getLabels () {
         return new String[]{
                 /*"memTotal",*/
-
                 "memBuffers",
                 "memCached",
                 "memSReclaimable",
@@ -257,6 +291,18 @@ public class MEMFragment extends Fragment {
                 "memThreshold",
                 "memFree",
                 "memUsed"
+        };
+    }
+
+    int[] getDescriptionID () {
+        return new int[] {
+                (R.string.memBuffers),
+                (R.string.memCached),
+                (R.string.memSReclaimable),
+                (R.string.memAvail),
+                (R.string.memThreshold),
+                (R.string.memFree),
+                (R.string.memUsed)
         };
     }
 
@@ -312,7 +358,7 @@ public class MEMFragment extends Fragment {
         }
 
         PieDataSet dataSet = new PieDataSet(values, "");//"procfs: /proc/meminfo");
-            dataSet.setSliceSpace(0.3f);
+            dataSet.setSliceSpace(0f);
             dataSet.setSelectionShift(5f);
             dataSet.setColors(getColors());
 
@@ -333,8 +379,8 @@ public class MEMFragment extends Fragment {
 
     private SpannableString generateCenterSpannableText() {
 
+        //TODO valami szöveg ide
         SpannableString s = new SpannableString("procfs data\nread by a BufferedReader"); //37
-        //TODO spannablestring
         s.setSpan(new RelativeSizeSpan(1.7f), 0, 11, 0);
         s.setSpan(new StyleSpan(Typeface.NORMAL), 11, s.length() - 14, 0);
         s.setSpan(new ForegroundColorSpan(Color.GRAY), 11, s.length() - 14, 0);

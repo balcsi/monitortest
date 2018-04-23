@@ -51,6 +51,10 @@ public class ServiceMonitor extends Service {
         return cpuDataReader.getCpuUsage();
     }
 
+    public float getFreeMem() {
+        return memDataReader.getFreeMem();
+    }
+
     /*public MemData getMem(int pid) {
         memDataReader.update(pid);
        return memDataReader.getMemData();

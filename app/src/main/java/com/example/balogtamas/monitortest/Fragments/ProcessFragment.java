@@ -1,6 +1,7 @@
 package com.example.balogtamas.monitortest.Fragments;
 
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.provider.ContactsContract;
 import android.support.annotation.Nullable;
@@ -10,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.Button;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 
 import com.example.balogtamas.monitortest.Activities.DataActivity;
 import com.example.balogtamas.monitortest.Fragments.Adapter.ProcessListAdapter;
@@ -35,6 +38,7 @@ public class ProcessFragment extends Fragment {
     List<ProcessData> processDataList = new ArrayList<>();
     ListView processListView;
     Button button;
+    ProgressBar progressBar;
 
 
 
@@ -45,21 +49,26 @@ public class ProcessFragment extends Fragment {
         public void displayProcesses(ArrayList<ProcessData> processDataArrayList) {
             processDataList.clear();
             processDataList = processDataArrayList;
-            setAdapter();
+            //ui threaden változtatok valamit, muszáj így hívni
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setAdapter();
+                }
+            });
         }
     };
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        //return super.onCreateView(inflater, container, savedInstanceState);
         View view = inflater.inflate(R.layout.fragment_process, container, false);
         //TODO: ez lehet nem kell, illetve ha kell, tuti nem így adunk neki uid-t
         //debug
         view.setId(getContext().getResources().getInteger(R.integer.ProcessFragment_id));
         processListView = view.findViewById(R.id.fragment_process_process_list);
-        setAdapter();
-
+        //setAdapter();
+        progressBar = view.findViewById(R.id.fragment_process_progress);
         button = view.findViewById(R.id.fragment_process_refresh);
         button.setOnTouchListener(new View.OnTouchListener() {
             public boolean onTouch(View v, MotionEvent event) {
@@ -81,12 +90,10 @@ public class ProcessFragment extends Fragment {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //TODO "fordítva" kell az interfész
-                ((DataActivity)getActivity()).displayProcesses();
+                new FillListViewTask().execute();
             }
         });
         return view;
-
     }
 
     @Override
@@ -98,13 +105,61 @@ public class ProcessFragment extends Fragment {
         }
         if(((DataActivity)getActivity()).getiProcessDataSender() == iProcessDataSender) {
             setAdapter();
+            new FillListViewTask().execute();
         }
-        //TODO a lista amiben vannak a processek, áttettem egyelőre fix méretűre (<-> wrap_content)
+    }
+
+    private void setProgressBar(int mode)
+    {
+        switch (mode) {
+            case 0 :
+                processListView.setVisibility(View.GONE);
+                progressBar.setVisibility(View.VISIBLE);
+            break;
+
+            case 1 :
+                progressBar.setVisibility(View.GONE);
+                processListView.setVisibility(View.VISIBLE);
+            break;
+        }
     }
 
     private void setAdapter()
     {
         adapter = new ProcessListAdapter(getActivity(), R.layout.fragment_mem_process_entry , processDataList);
         processListView.setAdapter(adapter);
+    }
+
+    class FillListViewTask extends AsyncTask<Void, Integer, Boolean>
+    {
+        @Override
+        protected Boolean doInBackground(Void... voids) {
+            ((DataActivity)getActivity()).displayProcesses();
+            return null;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            //ui threaden kell futtatni
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setProgressBar(0);
+                }
+            });
+            super.onPreExecute();
+        }
+
+        @Override
+        protected void onPostExecute(Boolean aBoolean) {
+            //ui threaden kell futtatni
+            getActivity().runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    setProgressBar(1);
+                }
+            });
+            super.onPostExecute(aBoolean);
+        }
     }
 }

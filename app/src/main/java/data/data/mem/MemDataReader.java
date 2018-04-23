@@ -100,9 +100,19 @@ public class MemDataReader {
         return retval;
     }
 
+    public float getAvailMem()
+    {
+        return this.globalMemData.getMemAvail();
+    }
+
     public MemData getMemData() {
 
         return memData;
+    }
+
+    public long getFreeMem()
+    {
+        return globalMemData.getMemFree();
     }
 
     public GlobalMemData getTotalMemData() {
