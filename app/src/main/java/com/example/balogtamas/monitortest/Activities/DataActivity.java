@@ -122,7 +122,7 @@ public class DataActivity extends AppCompatActivity {
             //void->int/float --> így spórolunk függvényhívást
             //TODO warningok konkatenációra
             ((TextView) (toolbar.findViewById(R.id.toolbar_lin_lay)).findViewById(R.id.toolbar_cpu)).setText("CPU: " + getCpuUsage() + "%");
-            ((TextView) (toolbar.findViewById(R.id.toolbar_lin_lay)).findViewById(R.id.toolbar_mem)).setText("FREE MEM: " + (int) getGlobalMemData() + "MB");
+            ((TextView) (toolbar.findViewById(R.id.toolbar_lin_lay)).findViewById(R.id.toolbar_mem)).setText("MEM: " + (int) getGlobalMemData() + "MB");
             if(getGlobalNetwork) {
                 Log.d(TAG, "run: " + serviceMonitor.getNetworkData());
             }
