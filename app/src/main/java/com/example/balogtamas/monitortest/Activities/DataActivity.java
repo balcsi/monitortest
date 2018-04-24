@@ -415,7 +415,7 @@ public class DataActivity extends AppCompatActivity {
     /*@Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-        //TODO:: onRequestPermissionsResult
+
         //szerintem ez nem vonatkozik a system callokra, nem kell
         switch (requestCode) {
             case 1: {

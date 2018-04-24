@@ -89,7 +89,7 @@ public class AppDataReader {
                 String packageName = usageStats.getPackageName();
                 String processName = getName(packageName);
                 int pid = runningProcesses.getPIDfromName(packageName);
-                //TODO ezt gyakorlatban nem tudom tesztelni, 23-as api kell hozzá minimum, de 23+ api kell hogy az emulátor tudjon wifi/mobilnetet emulálni; 26-on meg csak a saját appom PID-jét látom, ami nem használ internetet :D
+                //TODO teszt?
                 ProcessNetData processNetData = networkDataReader.getProcessNetData(pid);
                 if(pid > -1) {
                     data.add(new ProcessData(new AppData(pid, packageName, processName), MemData.createMemData(pid, activityManager), processNetData));

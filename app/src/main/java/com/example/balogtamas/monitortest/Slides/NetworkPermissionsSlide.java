@@ -71,7 +71,6 @@ public class NetworkPermissionsSlide extends SlideFragment {
             @Override
             public void onClick(View v) {
                 if(!(networkPermissionHelper.hasPermissions(permissions))) {
-                    //TODO
                     getActivity().requestPermissions(permissions, 100);
                 } else {
                     Toast.makeText(context, context.getString(R.string.intro_activity_permission_granted_already), Toast.LENGTH_SHORT).show();

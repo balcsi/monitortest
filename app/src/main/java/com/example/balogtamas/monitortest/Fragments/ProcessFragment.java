@@ -63,7 +63,7 @@ public class ProcessFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_process, container, false);
-        //TODO: ez lehet nem kell, illetve ha kell, tuti nem így adunk neki uid-t
+
         //debug
         view.setId(getContext().getResources().getInteger(R.integer.ProcessFragment_id));
         processListView = view.findViewById(R.id.fragment_process_process_list);

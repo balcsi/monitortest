@@ -102,7 +102,6 @@ public class MEMFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_mem, container, false);
-        //TODO: ez lehet nem kell, illetve ha kell, tuti nem így adunk neki uid-t
         view.setId(getContext().getResources().getInteger(R.integer.MEMFragment_id));
 
         mTfRegular = Typeface.createFromAsset(getActivity().getAssets(), "OpenSans-Regular.ttf");
@@ -379,7 +378,7 @@ public class MEMFragment extends Fragment {
 
     private SpannableString generateCenterSpannableText() {
 
-        //TODO valami szöveg ide
+
         SpannableString s = new SpannableString("procfs data\nread by a BufferedReader"); //37
         s.setSpan(new RelativeSizeSpan(1.7f), 0, 11, 0);
         s.setSpan(new StyleSpan(Typeface.NORMAL), 11, s.length() - 14, 0);

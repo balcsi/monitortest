@@ -226,7 +226,6 @@ public class MemData
         return new MemData(pid);
     }
 
-    //TODO: 27-es API-n valahogy máshogy kell, igazából lényegtelen
     /*@Override
     public String toString() {
         StringBuilder sb = new StringBuilder();

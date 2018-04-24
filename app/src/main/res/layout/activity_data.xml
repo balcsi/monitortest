@@ -40,6 +40,7 @@
         android:background="@drawable/grey_border_bot"
         app:tabMode="fixed"
         app:tabGravity="fill"
+        app:tabSelectedTextColor="@color/colorPrimaryDark"
         />
         <!--style="@style/CustomTabLayout"
         android:layout_gravity="left"
