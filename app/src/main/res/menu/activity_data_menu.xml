@@ -30,7 +30,7 @@
         android:title="@string/menu_action_global_network">
     </item>
 
-    <!--TODO menübe switch?-->
+
     <!--<item
         android:id="@+id/menu_item_switch"
         android:title=""

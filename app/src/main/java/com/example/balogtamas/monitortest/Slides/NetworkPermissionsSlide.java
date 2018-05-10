@@ -28,7 +28,6 @@ public class NetworkPermissionsSlide extends SlideFragment {
     TextView title, desc;
     Button button;
     NetworkPermissionHelper networkPermissionHelper;
-    //TODO phone-state nem kell (globális network adatok)
     final String[] permissions = new String[]
             {
                 ACCESS_WIFI_STATE,
@@ -83,7 +82,7 @@ public class NetworkPermissionsSlide extends SlideFragment {
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if(requestCode==100) {
-            //TODO
+
         }
     }
 }

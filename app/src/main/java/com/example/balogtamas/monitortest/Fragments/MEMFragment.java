@@ -111,7 +111,6 @@ public class MEMFragment extends Fragment {
         setupPieChart();
         setupBarChart();
 
-        //TODO csak az első item látszik
         //@see: https://stackoverflow.com/questions/15875552/arrayadapter-only-returning-one-position-android/15875581#comment30483550_15875581
         memEntryListView = view.findViewById(R.id.fragment_mem_mementry_list);
         memEntryArrayList =  getMemEntries();

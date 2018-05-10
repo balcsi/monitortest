@@ -41,7 +41,6 @@ public class BaseActivity extends AppCompatActivity {
         } else {
             this.startActivity(new Intent(this, IntroActivity.class));
             //elvileg a startactivity-nek meg kellene hivnia az ondestroyt () az eredeti activity-n, de finish() nélkül nem megy a vissza gomb
-            //TODO::startactivity+finish()
             finish();
         }
 

@@ -1,56 +1,58 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+
 <ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    >
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical">
-
-        <com.github.mikephil.charting.charts.BarChart
-            android:id="@+id/fragment_mem_bar_chart"
-            android:layout_width="match_parent"
-            android:layout_height="300dp"
-            >
-        </com.github.mikephil.charting.charts.BarChart>
-
-        <View android:layout_width="match_parent" android:layout_height="25dp"/>
-
-        <com.github.mikephil.charting.charts.PieChart
-            android:id="@+id/fragment_mem_pie_chart"
-            android:layout_width="match_parent"
-            android:layout_height="300dp">
-        </com.github.mikephil.charting.charts.PieChart>
-
-        <View android:layout_width="match_parent" android:layout_height="25dp"/>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:weightSum="100">
-            <TextView
-                android:layout_width="0dp"
+    android:fillViewport="true">
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="30"
-                android:text="@string/mem_fragment_name"
-                android:textStyle="bold"
-                />
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="70"
-                android:text="@string/mem_fragment_description"
-                android:textStyle="bold"
-                />
-        </LinearLayout>
+                android:orientation="vertical">
 
-        <ListView
-            android:id="@+id/fragment_mem_mementry_list"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content">
-        </ListView>
+                <com.github.mikephil.charting.charts.BarChart
+                    android:id="@+id/fragment_mem_bar_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    >
+                </com.github.mikephil.charting.charts.BarChart>
 
-    </LinearLayout>
+                <View android:layout_width="match_parent" android:layout_height="25dp"/>
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/fragment_mem_pie_chart"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp">
+                </com.github.mikephil.charting.charts.PieChart>
+
+                <View android:layout_width="match_parent" android:layout_height="25dp"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:weightSum="100">
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="30"
+                        android:text="@string/mem_fragment_name"
+                        android:textStyle="bold"
+                        />
+                    <TextView
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="70"
+                        android:text="@string/mem_fragment_description"
+                        android:textStyle="bold"
+                        />
+                </LinearLayout>
+
+                <ListView
+                    android:id="@+id/fragment_mem_mementry_list"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+                </ListView>
+            </LinearLayout>
 </ScrollView>
+

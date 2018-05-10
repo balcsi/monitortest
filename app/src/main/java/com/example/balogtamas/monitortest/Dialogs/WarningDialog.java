@@ -33,7 +33,6 @@ public class WarningDialog extends DialogFragment {
             }
         });
 
-        //TODO::nincs warningdialog.Builder ?
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                 .setTitle(getActivity().getString(R.string.dialog_warning_title_text))
                 .setView(dialog)

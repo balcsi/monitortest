@@ -69,7 +69,7 @@ public class IntervalReadDialog extends DialogFragment {
                 Log.d(TAG, "onStopTrackingTouch: progress = " + progress);
             }
         });
-        //TODO::nincs warningdialog.Builder ?
+
         AlertDialog alertDialog = new AlertDialog.Builder(getActivity())
                 .setTitle(getActivity().getString(R.string.dialog_readInterval_title_text))
                 .setView(dialog)

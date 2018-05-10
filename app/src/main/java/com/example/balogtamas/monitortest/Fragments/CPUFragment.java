@@ -234,7 +234,7 @@ public class CPUFragment extends Fragment {
                     try {
                         Thread.sleep(25);
                     } catch (InterruptedException e) {
-                        // TODO Auto-generated catch block
+
                         e.printStackTrace();
                     }
                 }

@@ -32,7 +32,7 @@ import static android.Manifest.permission.INTERNET;
 public class IntroActivity extends MaterialIntroActivity{
 
     UsageStatsPermissionHelper usageStatsPermissionHelper;
-    SharedPreferences sharedPreferences;
+
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,9 +79,7 @@ public class IntroActivity extends MaterialIntroActivity{
     public void onFinish() {
         super.onFinish();
         startActivity(new Intent(this, DataActivity.class));
-
-        //DEBUG
-
+        //DEBUG-hoz
         /*final Intent intent = new Intent(Settings.ACTION_USAGE_ACCESS_SETTINGS);
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
         //Log.i(TAG, "getUsagePermissions: try - " + "" );

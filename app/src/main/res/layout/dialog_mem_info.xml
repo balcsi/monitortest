@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     tools:layout_editor_absoluteY="25dp">
 
-    <!--TODO nincs sorkizárt? - https://stackoverflow.com/questions/1292575/android-textview-justify-text-->
+
     <TextView
         android:layout_gravity="center_vertical|right"
         android:id="@+id/dialog_mem_info_description"
@@ -22,7 +22,7 @@
     />
     <!--android:textAlignment="center"-->
 
-    <!--TODO kattintható link? setmovementMethod és autoLinkkel se megy, ha a resource-ba <a <href..>link</a>-t írok a resourceba-->
+
     <TextView
         android:gravity="center_horizontal"
         android:id="@+id/dialog_mem_info_link"

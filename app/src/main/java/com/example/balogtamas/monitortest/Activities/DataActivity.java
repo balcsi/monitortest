@@ -120,7 +120,6 @@ public class DataActivity extends AppCompatActivity {
             mHandler.postDelayed(this, readInterval);
 
             //void->int/float --> így spórolunk függvényhívást
-            //TODO warningok konkatenációra
             ((TextView) (toolbar.findViewById(R.id.toolbar_lin_lay)).findViewById(R.id.toolbar_cpu)).setText("CPU: " + getCpuUsage() + "%");
             ((TextView) (toolbar.findViewById(R.id.toolbar_lin_lay)).findViewById(R.id.toolbar_mem)).setText("MEM: " + (int) getGlobalMemData() + "MB");
             if(getGlobalNetwork) {
@@ -134,29 +133,13 @@ public class DataActivity extends AppCompatActivity {
     //ArrayList<AppData> processList = new ArrayList<>();
     //ArrayList<ProcessData> processDataArrayList = new ArrayList<>();
 
-
     //private final Thread readThread = new Thread(mRunnable);
 
     //TextView textView;
     //EditText editText;
     //Button btn;
 
-
-   // @Override
-   /* public int getCpuUsage() {
-        if(getCpuReaderListener() != null) {
-            if (serviceConnection != null) {
-                return serviceMonitor.getCPU();
-            } else {
-                return 0;
-            }
-        }
-        return 0;
-    }*/
-
-
-
-   //interfészekhez
+    //interfészekhez
 
     public void setCpuDataSender (ICpuDataSender cpuDataSender)
     {
@@ -214,7 +197,7 @@ public class DataActivity extends AppCompatActivity {
         return retVal;
     }
 
-    //TODO ezt publicra tettem, hogy elérjem a fragmentből; gondolom erre is inkább interfész kellene
+    //a folyamatokhoz tartozó fragmentben a folyamatlista frissítésére
     public void displayProcesses()
     {
         if(serviceMonitor!= null) {
@@ -224,6 +207,7 @@ public class DataActivity extends AppCompatActivity {
         }
     }
 
+    //menüben 'refresh'
     void doOneTick()
     {
         getCpuUsage();
@@ -231,7 +215,7 @@ public class DataActivity extends AppCompatActivity {
         displayProcesses();
     }
 
-   //TODO majd interfészhez
+
     /* void displayProcesses()
     {
         if(serviceMonitor != null) {
@@ -311,12 +295,9 @@ public class DataActivity extends AppCompatActivity {
     private void initToolBar()
     {
         toolbar = findViewById(R.id.activity_data_tool_bar);
-        //toolbar.setTitleTextColor(getColor(R.color.colorAccent));
-        //toolbar.setSubtitleTextColor(getColor(R.color.colorAccent));
         setSupportActionBar(toolbar);
         ActionBar actionBar = getSupportActionBar();
         actionBar.setTitle("");
-
     }
 
     @Override
@@ -336,7 +317,6 @@ public class DataActivity extends AppCompatActivity {
                 } else {
                     startMonitor();
                 }
-                //TODO szerintem elég a break, majd az ős lekezeli
                 //return isRunning;
                 break;
 
@@ -412,20 +392,4 @@ public class DataActivity extends AppCompatActivity {
 
     }
 
-    /*@Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
-        //super.onRequestPermissionsResult(requestCode, permissions, grantResults);
-
-        //szerintem ez nem vonatkozik a system callokra, nem kell
-        switch (requestCode) {
-            case 1: {
-                if (grantResults.length>0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-
-                } else {
-
-                }
-                return;
-            }
-        }
-    }*/
 }

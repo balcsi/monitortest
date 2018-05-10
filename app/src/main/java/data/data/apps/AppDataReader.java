@@ -89,7 +89,6 @@ public class AppDataReader {
                 String packageName = usageStats.getPackageName();
                 String processName = getName(packageName);
                 int pid = runningProcesses.getPIDfromName(packageName);
-                //TODO teszt?
                 ProcessNetData processNetData = networkDataReader.getProcessNetData(pid);
                 if(pid > -1) {
                     data.add(new ProcessData(new AppData(pid, packageName, processName), MemData.createMemData(pid, activityManager), processNetData));
